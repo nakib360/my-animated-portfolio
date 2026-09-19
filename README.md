@@ -1,17 +1,107 @@
-# React + Vite
+# My Animated Portfolio
 
-This template provides a minimal setup to get React working in Vite with HMR and some Oxlint rules.
+A modern, responsive, and animated developer portfolio built with React and Vite.
 
-Currently, two official plugins are available:
+This portfolio showcases my skills, projects, experience, and contact information through a clean and interactive user interface.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features
 
-## React Compiler
+* Modern and responsive UI
+* Built with React and Vite
+* Component-based architecture
+* Smooth animations and transitions
+* Responsive across different devices
+* Projects showcase
+* About section
+* Contact section
+* Responsive navigation
+* Fast development with Vite
+* Code quality with ESLint and Oxlint
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Technologies
 
-## Expanding the Oxlint configuration
+* React
+* Vite
+* JavaScript
+* Tailwind CSS
+* React Router
+* React Icons
+* Framer Motion
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and Oxlint's TypeScript related rules in your project.
-# my-animated-portfolio
+## Project Structure
+
+```text
+my-animated-portfolio/
+├── public/
+├── src/
+│   ├── assets/
+│   ├── components/
+│   ├── pages/
+│   ├── App.jsx
+│   ├── main.jsx
+│   └── index.css
+├── .gitignore
+├── package.json
+├── vite.config.js
+└── README.md
+```
+
+## Getting Started
+
+### Clone the repository
+
+```bash
+git clone https://github.com/your-username/my-animated-portfolio.git
+```
+
+### Navigate to the project
+
+```bash
+cd my-animated-portfolio
+```
+
+### Install dependencies
+
+```bash
+npm install
+```
+
+### Start the development server
+
+```bash
+npm run dev
+```
+
+The application will be available at:
+
+```text
+http://localhost:5173
+```
+
+## Build for Production
+
+Create a production build:
+
+```bash
+npm run build
+```
+
+Preview the production build:
+
+```bash
+npm run preview
+```
+
+## About Me
+
+**Nakib Uddin**
+
+MERN Stack Developer focused on building modern, responsive, and interactive web applications.
+
+## Contact
+
+If you would like to connect, collaborate, or discuss a project, feel free to reach out through the contact section of the portfolio.
+
+## License
+
+This project is available under the MIT License.
