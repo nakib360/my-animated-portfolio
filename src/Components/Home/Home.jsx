@@ -89,7 +89,7 @@ const Home = () => {
             </p>
           </div>
           <div className="absolute right-10 bottom-20 z-20 w-full max-w-1/3 rounded-tl-xl rounded-br-xl border-2 border-blue-600 bg-white/10 p-3 uppercase shadow-xs shadow-black/20 backdrop-blur-md">
-            <p className="text-white font-semibold">
+            <p className="text-white font-semibold text-justify">
               Welcome! I'm Nakib Uddin, a MERN stack developer who builds fast,
               clean, and reliable web applications.
             </p>
