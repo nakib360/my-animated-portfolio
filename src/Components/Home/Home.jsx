@@ -1,23 +1,95 @@
 import Header from "../../Common/Header.jsx/Header";
 import CyberpunkGlowBackground from "./CyberpunkGlowBackground";
+import Author from "../../assets/author.png";
 
 const Home = () => {
   return (
     <>
       <CyberpunkGlowBackground />
 
-      <div className="min-h-screen w-full overflow-hidden text-white">
-        <Header />
+      <div className="relative min-h-[100svh] w-full overflow-hidden text-white">
+        {/* Grid - Background */}
+        <svg
+          className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-20"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <defs>
+            <pattern
+              id="grid"
+              width="160"
+              height="160"
+              patternUnits="userSpaceOnUse"
+            >
+              <path
+                d="M 160 0 L 0 0 0 160"
+                fill="none"
+                stroke="white"
+                strokeWidth="1"
+              />
+              <path
+                d="M 0 -6 L 0 6 M -6 0 L 6 0"
+                stroke="white"
+                strokeWidth="2"
+              />
+            </pattern>
+          </defs>
 
-        <div className="w-full overflow-hidden">
+          <rect width="100%" height="100%" fill="url(#grid)" />
+        </svg>
+
+        {/* Content */}
+        <div className="relative z-10 min-h-[100svh]">
+          <Header />
+          {/* Big background NAKIB */}
           <p
-            className="w-full whitespace-nowrap text-center font-bold leading-none tracking-tight opacity-10"
+            className="pointer-events-none absolute left-0 top-[14%] w-full select-none whitespace-nowrap bg-gradient-to-b from-white/30 via-white/10 to-white/5 bg-clip-text text-center font-bold leading-none tracking-tight text-transparent sm:top-[11%] lg:top-[9%]"
             style={{
-              fontSize: "clamp(4rem, 24vw, 25rem)",
+              fontSize: "clamp(3.5rem, 24vw, 25rem)",
+              filter: "blur(0.2px)",
             }}
           >
             NAKIB
           </p>
+          <img
+            className="absolute bottom-0 left-1/2 z-10 h-[68svh] w-auto max-w-none -translate-x-1/2 select-none object-contain object-bottom sm:h-[78svh] md:h-[85svh] lg:h-[92svh] 2xl:h-[95svh]"
+            src={Author}
+            alt="Nakib"
+            draggable={false}
+            fetchPriority="high"
+          />
+          <div
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-[15] h-[28svh] backdrop-blur-xs sm:h-[32svh] lg:h-[36svh]"
+            style={{
+              background:
+                "linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0))",
+              WebkitMaskImage:
+                "linear-gradient(to top, black 0%, black 35%, transparent 100%)",
+              maskImage:
+                "linear-gradient(to top, black 0%, black 35%, transparent 100%)",
+            }}
+          />
+          <div className="absolute bottom-3 left-2 z-20 flex flex-col md:left-10 lg:left-80">
+            {/* Subheading */}
+            <p
+              className="pointer-events-none select-none whitespace-nowrap font-medium uppercase leading-none tracking-[0.3em] text-white/70"
+              style={{
+                fontSize: "clamp(0.75rem, 2vw, 2rem)",
+              }}
+            >
+              Developer
+            </p>
+
+            {/* Main heading */}
+            <p
+              className="pointer-events-none select-none whitespace-nowrap font-bold leading-none tracking-tight text-white"
+              style={{
+                fontSize: "clamp(2.5rem, 8vw, 8rem)",
+              }}
+            >
+              NAKIB
+            </p>
+          </div>
+          F
         </div>
       </div>
     </>
