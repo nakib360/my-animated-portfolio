@@ -12,42 +12,35 @@ const Header = () => {
   ];
 
   return (
-    <header className="relative flex items-center justify-between px-5 py-5 sm:px-8 lg:px-10">
+    <header className="relative flex flex-col gap-2 px-4 py-4 sm:px-6 md:flex-row md:items-center md:justify-between md:px-8 lg:px-10">
       {/* Logo */}
       <NavLink
         to="/"
-        className="z-10 text-lg font-bold whitespace-nowrap sm:text-xl"
+        className="z-10 text-base font-bold whitespace-nowrap sm:text-lg"
       >
         Nakib Uddin
       </NavLink>
 
-      {/* Centered Navigation */}
-      <nav className="absolute left-1/2 flex -translate-x-1/2 items-center gap-4 sm:gap-6 md:gap-10 lg:gap-14">
+      {/* Navigation: mobile-এ নিচের সারিতে, md+ এ মাঝখানে */}
+      <nav className="flex w-full items-center justify-between md:absolute md:left-1/2 md:w-auto md:-translate-x-1/2 md:justify-center md:gap-6 lg:gap-10">
         {rout.map((route) => (
           <NavLink
             key={route.id}
             to={route.path}
             className={({ isActive }) =>
-              `group relative flex items-center gap-1.5 whitespace-nowrap px-2 py-2 transition-colors duration-300 sm:gap-2 ${
-                isActive
-                  ? "text-blue-500"
-                  : "text-white hover:text-blue-400"
+              `group relative flex items-center gap-1 whitespace-nowrap px-2 py-1.5 text-xs transition-colors duration-300 sm:gap-1.5 sm:text-sm ${
+                isActive ? "text-green-200" : "text-white hover:text-green-200"
               }`
             }
           >
             {({ isActive }) => (
               <>
-                <span className="text-base sm:text-lg">
-                  {route.icon}
-                </span>
-
-                <span className="text-sm sm:text-base">
-                  {route.name}
-                </span>
+                <span className="text-sm sm:text-base">{route.icon}</span>
+                <span>{route.name}</span>
 
                 {/* Custom underline */}
                 <span
-                  className={`absolute bottom-0 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-blue-500 transition-all duration-300 ${
+                  className={`absolute bottom-0 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-green-200 transition-all duration-300 ${
                     isActive ? "w-full" : "w-0 group-hover:w-full"
                   }`}
                 />

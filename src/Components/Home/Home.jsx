@@ -5,9 +5,8 @@ import Author from "../../assets/author.png";
 const Home = () => {
   return (
     <>
-      <CyberpunkGlowBackground />
-
-      <div className="relative min-h-[100svh] w-full overflow-hidden text-white">
+      <div className="relative min-h-svh w-full overflow-hidden text-white">
+        <CyberpunkGlowBackground />
         {/* Grid - Background */}
         <svg
           className="pointer-events-none absolute inset-0 z-0 h-full w-full opacity-20"
@@ -38,7 +37,7 @@ const Home = () => {
         </svg>
 
         {/* Content */}
-        <div className="relative z-10 min-h-[100svh]">
+        <div className="relative z-10 min-h-svh">
           <Header />
           {/* Big background NAKIB */}
           <p
@@ -58,7 +57,7 @@ const Home = () => {
             fetchPriority="high"
           />
           <div
-            className="pointer-events-none absolute inset-x-0 bottom-0 z-[15] h-[28svh] backdrop-blur-xs sm:h-[32svh] lg:h-[36svh]"
+            className="pointer-events-none absolute inset-x-0 bottom-0 z-15 h-[28svh] backdrop-blur-xs sm:h-[32svh] lg:h-[36svh]"
             style={{
               background:
                 "linear-gradient(to top, rgba(0,0,0,0.55), rgba(0,0,0,0))",
@@ -68,7 +67,7 @@ const Home = () => {
                 "linear-gradient(to top, black 0%, black 35%, transparent 100%)",
             }}
           />
-          <div className="absolute bottom-3 left-2 z-20 flex flex-col md:left-10 lg:left-80">
+          <div className="absolute bottom-3 left-2 z-20 flex flex-col md:left-10 lg:left-80 justify-start items-start">
             {/* Subheading */}
             <p
               className="pointer-events-none select-none whitespace-nowrap font-medium uppercase leading-none tracking-[0.3em] text-white/70"
@@ -81,7 +80,7 @@ const Home = () => {
 
             {/* Main heading */}
             <p
-              className="pointer-events-none select-none whitespace-nowrap font-bold leading-none tracking-tight text-white"
+              className="pointer-events-none select-none whitespace-nowrap font-bold leading-none tracking-tight text-white -ml-[0.06em]"
               style={{
                 fontSize: "clamp(2.5rem, 8vw, 8rem)",
               }}
@@ -89,7 +88,12 @@ const Home = () => {
               NAKIB
             </p>
           </div>
-          F
+          <div className="absolute right-10 bottom-20 z-20 w-full max-w-1/3 rounded-tl-xl rounded-br-xl border-2 border-blue-600 bg-white/10 p-3 uppercase shadow-xs shadow-black/20 backdrop-blur-md">
+            <p className="text-white font-semibold">
+              Welcome! I'm Nakib Uddin, a MERN stack developer who builds fast,
+              clean, and reliable web applications.
+            </p>
+          </div>
         </div>
       </div>
     </>

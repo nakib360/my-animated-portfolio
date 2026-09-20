@@ -1,6 +1,5 @@
 import { useEffect, useRef } from "react";
 
-
 export default function CyberpunkGlowBackground({
   colors = ["#00f0ff", "#7a2eff", "#00ffa3"],
   bg = "#07040f",
@@ -50,10 +49,11 @@ export default function CyberpunkGlowBackground({
     <div
       ref={containerRef}
       style={{
-        position: "fixed",
+        position: "absolute", // আগে ছিল "fixed"
         inset: 0,
-        zIndex: -1,
+        zIndex: 0, // আগে ছিল -1
         overflow: "hidden",
+        pointerEvents: "none",
         background: bg,
       }}
     >
