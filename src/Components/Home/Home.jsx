@@ -5,7 +5,7 @@ import Author from "../../assets/author.png";
 const Home = () => {
   return (
     <>
-      <div className="relative min-h-svh w-full overflow-hidden text-white">
+      <div className="relative isolate min-h-svh w-full overflow-hidden text-white">
         <CyberpunkGlowBackground />
         {/* Grid - Background */}
         <svg
