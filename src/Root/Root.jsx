@@ -7,7 +7,7 @@ const Root = () => {
       <div id="home">
         <Home />
       </div>
-      <div id="about" className="my-10">
+      <div id="about" className="py-10">
         <About />
       </div>
     </div>

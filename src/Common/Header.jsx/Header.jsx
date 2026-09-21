@@ -35,7 +35,6 @@ const Header = () => {
         }
       });
 
-      // Page-এর একদম নিচে গেলে Contact active
       const atBottom =
         window.innerHeight + window.scrollY >=
         document.documentElement.scrollHeight - 5;
@@ -54,7 +53,6 @@ const Header = () => {
       passive: true,
     });
 
-    // Browser URL hash manually change করলে
     const handleHashChange = () => {
       setActive(window.location.hash || "#home");
     };
