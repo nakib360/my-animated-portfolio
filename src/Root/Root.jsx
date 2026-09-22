@@ -5,13 +5,13 @@ import ParticleBackground from "./Particlebackground";
 
 const Root = () => {
   return (
-    <div className="relative bg-gray-200">
+    <div className="relative ">
       <ParticleBackground />
       <div className="relative z-10">
         <div id="home">
           <Home />
         </div>
-        <div id="about" className="py-10">
+        <div id="about" className="py-10 ">
           <About />
         </div>
         <div id="projects" className="py-10">

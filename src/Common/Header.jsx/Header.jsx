@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { HiOutlineHome } from "react-icons/hi2";
 import { FaUserAstronaut, FaLaptopCode } from "react-icons/fa6";
 import { PiHandshake } from "react-icons/pi";
+import { HiOutlineDownload } from "react-icons/hi";
 import logo from "../../assets/nakib360's logo.svg";
 
 const rout = [
@@ -13,17 +14,25 @@ const rout = [
 
 const Header = () => {
   const [active, setActive] = useState(window.location.hash || "#home");
+  const [isFloating, setIsFloating] = useState(false);
 
   useEffect(() => {
     if (!window.location.hash) {
       window.history.replaceState(null, "", "#home");
     }
+
     const sections = rout
       .map((route) => document.querySelector(route.path))
       .filter(Boolean);
 
     const updateActiveSection = () => {
       const scrollPosition = window.scrollY + window.innerHeight * 0.35;
+
+      const homeSection = document.querySelector("#home");
+
+      if (homeSection) {
+        setIsFloating(window.scrollY > homeSection.offsetHeight * 0.35);
+      }
 
       let currentSection = "#home";
 
@@ -46,7 +55,6 @@ const Header = () => {
       setActive(currentSection);
     };
 
-    // Initial detection
     updateActiveSection();
 
     window.addEventListener("scroll", updateActiveSection, {
@@ -66,45 +74,93 @@ const Header = () => {
   }, []);
 
   return (
-    <header className="relative flex flex-col gap-2 px-4 py-4 sm:px-6 md:flex-row md:items-center md:justify-between md:px-8 lg:px-10">
-      {/* Logo */}
-      <a
-        href="#home"
-        onClick={() => setActive("#home")}
-        className="z-10 whitespace-nowrap text-base font-bold sm:text-lg"
-      >
-        <img className="h-15" src={logo} alt="Nakib360 logo" />
-      </a>
+    <>
+      {/* ================= Original Header ================= */}
+      <header className="flex flex-col gap-4 px-4 py-4 sm:px-6 md:flex-row md:items-center md:justify-between md:px-8 lg:px-10">
+        {/* Logo */}
+        <a
+          href="#home"
+          onClick={() => setActive("#home")}
+          className="z-10 whitespace-nowrap text-base font-bold sm:text-lg"
+        >
+          <img className="h-15" src={logo} alt="Nakib360 logo" />
+        </a>
 
-      {/* Navigation */}
-      <nav className="flex w-full items-center justify-between md:absolute md:left-1/2 md:w-auto md:-translate-x-1/2 md:justify-center md:gap-6 lg:gap-10">
-        {rout.map((route) => {
-          const isActive = active === route.path;
+        {/* Original Navigation */}
+        <nav className="flex w-full items-center justify-between gap-2 md:w-auto md:gap-6 lg:gap-8">
+          {rout.map((route) => {
+            const isActive = active === route.path;
 
-          return (
-            <a
-              key={route.id}
-              href={route.path}
-              onClick={() => setActive(route.path)}
-              className={`group relative flex items-center gap-1 whitespace-nowrap px-2 py-1.5 text-xs transition-colors duration-300 sm:gap-1.5 sm:text-sm ${
-                isActive ? "text-green-200" : "text-white hover:text-green-200"
-              }`}
-            >
-              <span className="text-sm sm:text-base">{route.icon}</span>
-
-              <span>{route.name}</span>
-
-              {/* Custom underline */}
-              <span
-                className={`absolute bottom-0 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-green-200 transition-all duration-300 ${
-                  isActive ? "w-full" : "w-0 group-hover:w-full"
+            return (
+              <a
+                key={route.id}
+                href={route.path}
+                onClick={() => setActive(route.path)}
+                className={`group relative flex items-center gap-1 whitespace-nowrap px-2 py-1.5 text-xs transition-colors duration-300 sm:gap-1.5 sm:text-sm ${
+                  isActive
+                    ? "text-green-200"
+                    : "text-white hover:text-green-200"
                 }`}
-              />
-            </a>
-          );
-        })}
-      </nav>
-    </header>
+              >
+                <span className="text-sm sm:text-base">{route.icon}</span>
+
+                <span>{route.name}</span>
+
+                <span
+                  className={`absolute bottom-0 left-1/2 h-0.5 -translate-x-1/2 rounded-full bg-green-200 transition-all duration-300 ${
+                    isActive ? "w-full" : "w-0 group-hover:w-full"
+                  }`}
+                />
+              </a>
+            );
+          })}
+        </nav>
+
+        {/* Download CV */}
+        <a
+          href="/cv.pdf"
+          download
+          className="z-10 flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-green-200 px-4 py-2 text-xs font-medium text-green-200 transition-all hover:bg-green-200 hover:text-black sm:text-sm"
+        >
+          <HiOutlineDownload className="text-sm sm:text-base" />
+          Download CV
+        </a>
+      </header>
+
+      {/* ================= Floating Navigation ================= */}
+      <div
+        className={`fixed left-1/2 top-4 z-[100] -translate-x-1/2 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+          isFloating
+            ? "translate-y-0 opacity-100"
+            : "-translate-y-[150%] opacity-0 pointer-events-none"
+        }`}
+      >
+        <nav className="flex items-center gap-1 rounded-full bg-white p-1.5 shadow-xl shadow-black/20">
+          {rout.map((route) => {
+            const isActive = active === route.path;
+
+            return (
+              <a
+                key={route.id}
+                href={route.path}
+                onClick={() => setActive(route.path)}
+                className={`flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-xs transition-all duration-300 sm:gap-1.5 sm:px-4 sm:text-sm ${
+                  isActive
+                    ? "bg-blue-500 text-white"
+                    : "text-gray-700 hover:bg-gray-100"
+                }`}
+              >
+                <span className="text-sm sm:text-base">
+                  {route.icon}
+                </span>
+
+                <span>{route.name}</span>
+              </a>
+            );
+          })}
+        </nav>
+      </div>
+    </>
   );
 };
 
