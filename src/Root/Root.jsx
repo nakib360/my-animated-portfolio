@@ -1,5 +1,6 @@
 import About from "../Components/About/About";
 import Home from "../Components/Home/Home";
+import Projects from "../Components/Projects/Projects";
 import ParticleBackground from "./Particlebackground";
 
 const Root = () => {
@@ -12,6 +13,9 @@ const Root = () => {
         </div>
         <div id="about" className="py-10">
           <About />
+        </div>
+        <div id="projects" className="py-10">
+          <Projects/>
         </div>
       </div>
     </div>
