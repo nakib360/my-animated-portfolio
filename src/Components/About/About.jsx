@@ -14,11 +14,16 @@ import MongoLogo from "../../assets/mongodb.png";
 import JwtLogo from "../../assets/JWT.webp";
 import FirebaseLogo from "../../assets/Firebase.png";
 
+//version control
+import githubIcon from "../../assets/github.png";
+import gitIcon from "../../assets/git.png";
+
 //Education
 import BaitCampas from "../../assets/bait_campus.jpeg";
 import BaitLogo from "../../assets/BatushSharaf.png";
 import NesariaCampas from "../../assets/Nesaria_campus.jpeg";
 import NesariaLogo from "../../assets/Nesaria.png";
+
 
 const About = () => {
   const frontend = [
@@ -38,9 +43,15 @@ const About = () => {
     { name: "Firebase", icon: FirebaseLogo },
   ];
 
+  const versionControl = [
+    { name: "Git", icon: gitIcon },
+    { name: "GitHub", icon: githubIcon },
+  ];
+  
   const columns = [
     { title: "Frontend", items: frontend },
     { title: "Backend", items: backend },
+    { title: "Version Control", items: versionControl },
   ];
 
   const education = [
@@ -87,8 +98,8 @@ const About = () => {
 
         <div className="h-8 w-px bg-gray-400 mx-auto" />
 
-        <div className="relative grid grid-cols-2 w-full">
-          <div className="absolute top-0 left-1/4 right-1/4 border-t border-gray-400" />
+        <div className="relative grid grid-cols-3 w-full">
+          <div className="absolute top-0 left-[16.6667%] right-[16.6667%] border-t border-gray-400" />
 
           {columns.map((col) => (
             <div key={col.title} className="flex flex-col">
