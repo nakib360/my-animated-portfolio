@@ -11,10 +11,10 @@ const Root = () => {
         <div id="home">
           <Home />
         </div>
-        <div id="about" className="py-10 ">
+        <div id="about" className="py-10 scroll-mt-15">
           <About />
         </div>
-        <div id="projects" className="py-10">
+        <div id="projects" className="py-10 scroll-mt-15">
           <Projects/>
         </div>
       </div>

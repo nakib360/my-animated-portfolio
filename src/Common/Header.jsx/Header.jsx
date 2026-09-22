@@ -1,3 +1,4 @@
+import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import { HiOutlineHome } from "react-icons/hi2";
 import { FaUserAstronaut, FaLaptopCode } from "react-icons/fa6";
@@ -73,6 +74,27 @@ const Header = () => {
     };
   }, []);
 
+  const handleNavigation = (e, path) => {
+    e.preventDefault();
+
+    const section = document.querySelector(path);
+
+    if (!section) return;
+
+    const offset = 100;
+
+    const top =
+      section.getBoundingClientRect().top + window.scrollY - offset;
+
+    window.scrollTo({
+      top,
+      behavior: "smooth",
+    });
+
+    window.history.pushState(null, "", path);
+    setActive(path);
+  };
+
   return (
     <>
       {/* ================= Original Header ================= */}
@@ -80,7 +102,7 @@ const Header = () => {
         {/* Logo */}
         <a
           href="#home"
-          onClick={() => setActive("#home")}
+          onClick={(e) => handleNavigation(e, "#home")}
           className="z-10 whitespace-nowrap text-base font-bold sm:text-lg"
         >
           <img className="h-15" src={logo} alt="Nakib360 logo" />
@@ -95,14 +117,16 @@ const Header = () => {
               <a
                 key={route.id}
                 href={route.path}
-                onClick={() => setActive(route.path)}
+                onClick={(e) => handleNavigation(e, route.path)}
                 className={`group relative flex items-center gap-1 whitespace-nowrap px-2 py-1.5 text-xs transition-colors duration-300 sm:gap-1.5 sm:text-sm ${
                   isActive
                     ? "text-green-200"
                     : "text-white hover:text-green-200"
                 }`}
               >
-                <span className="text-sm sm:text-base">{route.icon}</span>
+                <span className="text-sm sm:text-base">
+                  {route.icon}
+                </span>
 
                 <span>{route.name}</span>
 
@@ -128,38 +152,41 @@ const Header = () => {
       </header>
 
       {/* ================= Floating Navigation ================= */}
-      <div
-        className={`fixed left-1/2 top-4 z-[100] -translate-x-1/2 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-          isFloating
-            ? "translate-y-0 opacity-100"
-            : "-translate-y-[150%] opacity-0 pointer-events-none"
-        }`}
-      >
-        <nav className="flex items-center gap-1 rounded-full bg-white p-1.5 shadow-xl shadow-black/20">
-          {rout.map((route) => {
-            const isActive = active === route.path;
+      {createPortal(
+        <div
+          className={`pointer-events-none fixed inset-x-0 top-0 z-2147483647 flex justify-center transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
+            isFloating
+              ? "translate-y-0 opacity-100"
+              : "-translate-y-full opacity-0"
+          }`}
+        >
+          <nav className="pointer-events-auto mt-4 flex items-center gap-1 rounded-full bg-white p-1.5 shadow-xl shadow-black/20">
+            {rout.map((route) => {
+              const isActive = active === route.path;
 
-            return (
-              <a
-                key={route.id}
-                href={route.path}
-                onClick={() => setActive(route.path)}
-                className={`flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-xs transition-all duration-300 sm:gap-1.5 sm:px-4 sm:text-sm ${
-                  isActive
-                    ? "bg-blue-500 text-white"
-                    : "text-gray-700 hover:bg-gray-100"
-                }`}
-              >
-                <span className="text-sm sm:text-base">
-                  {route.icon}
-                </span>
+              return (
+                <a
+                  key={route.id}
+                  href={route.path}
+                  onClick={(e) => handleNavigation(e, route.path)}
+                  className={`flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-xs transition-all duration-300 sm:gap-1.5 sm:px-4 sm:text-sm ${
+                    isActive
+                      ? "bg-blue-500 text-white"
+                      : "text-gray-700 hover:bg-gray-100"
+                  }`}
+                >
+                  <span className="text-sm sm:text-base">
+                    {route.icon}
+                  </span>
 
-                <span>{route.name}</span>
-              </a>
-            );
-          })}
-        </nav>
-      </div>
+                  <span>{route.name}</span>
+                </a>
+              );
+            })}
+          </nav>
+        </div>,
+        document.body,
+      )}
     </>
   );
 };
