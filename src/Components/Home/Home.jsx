@@ -41,7 +41,7 @@ const Home = () => {
           <Header />
           {/* Big background NAKIB */}
           <p
-            className="pointer-events-none absolute left-0 top-[14%] w-full select-none whitespace-nowrap bg-gradient-to-b from-white/30 via-white/10 to-white/5 bg-clip-text text-center font-bold leading-none tracking-tight text-transparent sm:top-[11%] lg:top-[9%]"
+            className="pointer-events-none absolute left-0 top-[14%] w-full select-none whitespace-nowrap bg-linear-to-b from-white/30 via-white/10 to-white/5 bg-clip-text text-center font-bold leading-none tracking-tight text-transparent sm:top-[11%] lg:top-[9%]"
             style={{
               fontSize: "clamp(3.5rem, 24vw, 25rem)",
               filter: "blur(0.2px)",
@@ -80,7 +80,7 @@ const Home = () => {
 
             {/* Main heading */}
             <p
-              className="pointer-events-none select-none whitespace-nowrap font-bold leading-none tracking-tight text-white -ml-[0.06em]"
+              className="pointer-events-none select-none whitespace-nowrap font-bold leading-none tracking-tight text-white ml-[-0.06em]"
               style={{
                 fontSize: "clamp(2.5rem, 8vw, 8rem)",
               }}
