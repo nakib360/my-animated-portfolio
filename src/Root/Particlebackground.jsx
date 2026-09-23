@@ -28,7 +28,7 @@ const ParticleBackground = ({
 
     const resize = () => {
       width = canvas.width = canvas.offsetWidth;
-      height = canvas.height = canvas.offsetHeight;
+      height = canvas.height = canvas.offsetHeight;  
     };
 
     const createParticles = () => {
@@ -89,4 +89,4 @@ const ParticleBackground = ({
   );
 };
 
-export default ParticleBackground;
+export default ParticleBackground; 
