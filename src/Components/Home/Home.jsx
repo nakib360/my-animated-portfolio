@@ -46,7 +46,7 @@ const Home = () => {
             NAKIB
           </p>
           <img
-            className="absolute bottom-0 left-1/2 z-10 w-auto max-w-none -translate-x-1/2 select-none object-contain object-bottom h-[28rem] sm:h-[30rem] md:h-[32rem] lg:h-[35rem]"
+            className="absolute bottom-0 left-1/2 z-10 w-auto max-w-none -translate-x-1/2 select-none object-contain object-bottom h-112 sm:h-120 md:h-128 lg:h-140"
             src={Author}
             alt="Nakib"
             draggable={false}
