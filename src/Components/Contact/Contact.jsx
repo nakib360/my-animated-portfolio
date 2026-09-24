@@ -165,7 +165,7 @@ const Contact = () => {
 
             <div className="mx-auto grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-2xl border border-gray-400 md:grid-cols-[0.8fr_1.2fr]">
 
-                <div className="relative flex flex-col justify-between border-b border-gray-400 p-6 sm:p-8 md:border-b-0 md:border-r">
+                <div className="relative flex flex-col justify-between border-b-0 border-gray-400 p-6 sm:p-8 md:border-b-0 md:border-r">
 
                     <div>
                         <p className="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-purple-600">

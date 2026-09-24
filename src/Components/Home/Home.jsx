@@ -5,7 +5,7 @@ import Author from "../../assets/author.png";
 const Home = () => {
   return (
     <>
-      <div className="relative isolate min-h-svh w-full overflow-hidden text-white">
+      <div className="relative isolate w-full overflow-hidden text-white">
         <CyberpunkGlowBackground />
         {/* Grid - Background */}
         <svg
@@ -37,20 +37,16 @@ const Home = () => {
         </svg>
 
         {/* Content */}
-        <div className="relative z-10 min-h-svh">
+        <div className="relative z-10 min-h-150 md:min-h-162.5">
           <Header />
           {/* Big background NAKIB */}
           <p
-            className="pointer-events-none absolute left-0 top-[14%] w-full select-none whitespace-nowrap bg-linear-to-b from-white/30 via-white/10 to-white/5 bg-clip-text text-center font-bold leading-none tracking-tight text-transparent sm:top-[11%] lg:top-[9%]"
-            style={{
-              fontSize: "clamp(3.5rem, 24vw, 25rem)",
-              filter: "blur(0.2px)",
-            }}
+            className="pointer-events-none text-[7rem] md:text-[15rem] lg:text-[20rem] absolute left-0 top-[25%] md:top-[14%] w-full select-none whitespace-nowrap bg-linear-to-b from-white/30 via-white/10 to-white/5 bg-clip-text text-center font-bold leading-none tracking-tight text-transparent sm:top-[11%] lg:top-[9%]"
           >
             NAKIB
           </p>
           <img
-            className="absolute bottom-0 left-1/2 z-10 h-[68svh] w-auto max-w-none -translate-x-1/2 select-none object-contain object-bottom sm:h-[78svh] md:h-[85svh] lg:h-[92svh] 2xl:h-[95svh]"
+            className="absolute bottom-0 left-1/2 z-10 w-auto max-w-none -translate-x-1/2 select-none object-contain object-bottom h-[28rem] sm:h-[30rem] md:h-[32rem] lg:h-[35rem]"
             src={Author}
             alt="Nakib"
             draggable={false}
@@ -70,26 +66,20 @@ const Home = () => {
           <div className="absolute bottom-3 left-2 z-20 flex flex-col md:left-10 lg:left-80 justify-start items-start">
             {/* Subheading */}
             <p
-              className="pointer-events-none select-none whitespace-nowrap font-medium uppercase leading-none tracking-[0.3em] text-white/70"
-              style={{
-                fontSize: "clamp(0.75rem, 2vw, 2rem)",
-              }}
+              className="pointer-events-none text-[1.1rem] md:text-[1.7rem] lg:text-[2rem] select-none whitespace-nowrap font-medium uppercase leading-none tracking-[0.3em] text-white/70"
             >
               Developer
             </p>
 
             {/* Main heading */}
             <p
-              className="pointer-events-none select-none whitespace-nowrap font-bold leading-none tracking-tight text-white ml-[-0.06em]"
-              style={{
-                fontSize: "clamp(2.5rem, 8vw, 8rem)",
-              }}
+              className="pointer-events-none text-[4rem] md:text-[6rem] lg:text-[7rem] select-none whitespace-nowrap font-bold leading-none tracking-tight text-white ml-[-0.06em]"
             >
               NAKIB
             </p>
           </div>
-          <div className="absolute right-10 bottom-20 z-20 w-full max-w-1/3 rounded-tl-xl rounded-br-xl border-2 border-blue-600 bg-white/10 p-3 uppercase shadow-xs shadow-black/20 backdrop-blur-md">
-            <p className="text-white font-semibold text-justify">
+          <div className="absolute right-3 bottom-20 md:right-15 md:bottom-30 z-20 w-full max-w-1/2 md:max-w-1/2 lg:max-w-1/3 rounded-tl-xl rounded-br-xl  bg-white/10 p-2 md:p-3 uppercase shadow-xs shadow-black/20 backdrop-blur-md">
+            <p className="text-white font-semibold text-justify text-xs md:text-sm">
               Welcome! I'm Nakib Uddin, a MERN stack developer who builds fast,
               clean, and reliable web applications.
             </p>
