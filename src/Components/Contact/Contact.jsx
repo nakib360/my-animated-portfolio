@@ -161,9 +161,9 @@ const Contact = () => {
                 </h2>
             </section>
 
-            <div className="mx-auto mt-8 h-10 w-px bg-gray-400" />
+            <div className="mx-auto mt-8 h-10 w-px bg-gray-400" />    
 
-            <div className="mx-auto grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-2xl border border-gray-400 backdrop-blur-md md:grid-cols-[0.8fr_1.2fr]">
+            <div className="mx-auto grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-2xl border border-gray-400 md:grid-cols-[0.8fr_1.2fr]">
 
                 <div className="relative flex flex-col justify-between border-b border-gray-400 p-6 sm:p-8 md:border-b-0 md:border-r">
 

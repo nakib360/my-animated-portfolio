@@ -1,3 +1,4 @@
+
 import { createPortal } from "react-dom";
 import { useEffect, useState } from "react";
 import { HiOutlineHome } from "react-icons/hi2";
@@ -97,19 +98,48 @@ const Header = () => {
 
   return (
     <>
-      {/* ================= Original Header ================= */}
-      <header className="flex flex-col gap-4 px-4 py-4 sm:px-6 md:flex-row md:items-center md:justify-between md:px-8 lg:px-10">
+      {/* =====================================================
+          NORMAL HEADER
+      ===================================================== */}
+      <header
+        className="
+          flex flex-col gap-4
+          px-4 py-4
+          sm:px-6
+          md:flex-row md:items-center md:justify-between
+          md:px-8
+          lg:px-10
+        "
+      >
         {/* Logo */}
         <a
           href="#home"
           onClick={(e) => handleNavigation(e, "#home")}
           className="z-10 whitespace-nowrap text-base font-bold sm:text-lg"
         >
-          <img className="h-15" src={logo} alt="Nakib360 logo" />
+          <img
+            className="h-12 sm:h-14 md:h-15"
+            src={logo}
+            alt="Nakib360 logo"
+          />
         </a>
 
-        {/* Original Navigation */}
-        <nav className="flex w-full items-center justify-between gap-2 md:w-auto md:gap-6 lg:gap-8">
+        {/* =====================================================
+            DESKTOP NAVIGATION
+        ===================================================== */}
+        <nav
+          className="
+            hidden
+            w-full
+            items-center
+            justify-between
+            gap-2
+            md:flex
+            md:w-auto
+            md:gap-6
+            lg:gap-8
+          "
+        >
           {rout.map((route) => {
             const isActive = active === route.path;
 
@@ -140,27 +170,79 @@ const Header = () => {
           })}
         </nav>
 
-        {/* Download CV */}
+        {/* =====================================================
+            DOWNLOAD CV
+        ===================================================== */}
         <a
           href="/cv.pdf"
           download
-          className="z-10 flex items-center justify-center gap-2 whitespace-nowrap rounded-full border border-green-200 px-4 py-2 text-xs font-medium text-green-200 transition-all hover:bg-green-200 hover:text-black sm:text-sm"
+          aria-label="Download CV"
+          className="
+            absolute right-4 top-4
+            z-10
+            flex items-center justify-center
+            gap-2
+            rounded-full
+            border border-green-200
+            px-3 py-2
+            text-xs font-medium
+            text-green-200
+            transition-all
+            hover:bg-green-200
+            hover:text-black
+            sm:right-6
+            md:static
+            md:px-4
+            md:py-2
+            md:text-sm
+            lg:right-auto
+          "
         >
-          <HiOutlineDownload className="text-sm sm:text-base" />
-          Download CV
+          <HiOutlineDownload className="text-base sm:text-lg" />
+
+          <span className="">
+            Download CV
+          </span>
         </a>
       </header>
 
-      {/* ================= Floating Navigation ================= */}
+      {/* =====================================================
+          MOBILE FLOATING NAVIGATION
+          Only visible below md
+      ===================================================== */}
       {createPortal(
         <div
-          className={`pointer-events-none fixed inset-x-0 top-0 z-2147483647 flex justify-center transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] ${
-            isFloating
-              ? "translate-y-0 opacity-100"
-              : "-translate-y-full opacity-0"
-          }`}
+          className={`
+            fixed
+            bottom-4
+            left-1/2
+            z-[9999]
+            -translate-x-1/2
+            transition-all
+            duration-500
+            md:hidden
+            w-full 
+            px-3
+            ${
+              isFloating
+                ? "translate-y-0 opacity-100"
+                : "pointer-events-none translate-y-20 opacity-0"
+            }
+          `}
         >
-          <nav className="pointer-events-auto mt-4 flex items-center gap-1 rounded-full bg-white p-1.5 shadow-xl shadow-black/20">
+          <nav
+            className="
+              flex
+              items-center
+              justify-around
+              gap-1
+              rounded-full
+              bg-white
+              p-1.5
+              shadow-xl
+              shadow-black/20
+            "
+          >
             {rout.map((route) => {
               const isActive = active === route.path;
 
@@ -169,11 +251,104 @@ const Header = () => {
                   key={route.id}
                   href={route.path}
                   onClick={(e) => handleNavigation(e, route.path)}
-                  className={`flex items-center gap-1 whitespace-nowrap rounded-full px-3 py-2 text-xs transition-all duration-300 sm:gap-1.5 sm:px-4 sm:text-sm ${
-                    isActive
-                      ? "bg-blue-500 text-white"
-                      : "text-gray-700 hover:bg-gray-100"
-                  }`}
+                  aria-label={route.name}
+                  className={`
+                    flex
+                    h-11
+                    w-11
+                    items-center
+                    justify-center
+                    rounded-full
+                    text-lg
+                    transition-all
+                    duration-300
+
+                    ${
+                      isActive
+                        ? "bg-blue-500 text-white shadow-md shadow-blue-500/30"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }
+                  `}
+                >
+                  {route.icon}
+                </a>
+              );
+            })}
+          </nav>
+        </div>,
+
+        document.body,
+      )}
+
+      {/* =====================================================
+          DESKTOP FLOATING NAVIGATION
+          Only visible md and above
+      ===================================================== */}
+      {createPortal(
+        <div
+          className={`
+            pointer-events-none
+            fixed
+            inset-x-0
+            top-0
+            z-[9999]
+            hidden
+            justify-center
+            transition-all
+            duration-500
+            ease-[cubic-bezier(0.22,1,0.36,1)]
+            md:flex
+
+            ${
+              isFloating
+                ? "translate-y-0 opacity-100"
+                : "-translate-y-full opacity-0"
+            }
+          `}
+        >
+          <nav
+            className="
+              pointer-events-auto
+              mt-4
+              flex
+              items-center
+              gap-1
+              rounded-full
+              bg-white
+              p-1.5
+              shadow-xl
+              shadow-black/20
+            "
+          >
+            {rout.map((route) => {
+              const isActive = active === route.path;
+
+              return (
+                <a
+                  key={route.id}
+                  href={route.path}
+                  onClick={(e) => handleNavigation(e, route.path)}
+                  className={`
+                    flex
+                    items-center
+                    gap-1
+                    whitespace-nowrap
+                    rounded-full
+                    px-3
+                    py-2
+                    text-xs
+                    transition-all
+                    duration-300
+                    sm:gap-1.5
+                    sm:px-4
+                    sm:text-sm
+
+                    ${
+                      isActive
+                        ? "bg-blue-500 text-white"
+                        : "text-gray-700 hover:bg-gray-100"
+                    }
+                  `}
                 >
                   <span className="text-sm sm:text-base">
                     {route.icon}
@@ -185,6 +360,7 @@ const Header = () => {
             })}
           </nav>
         </div>,
+
         document.body,
       )}
     </>
@@ -192,3 +368,4 @@ const Header = () => {
 };
 
 export default Header;
+
