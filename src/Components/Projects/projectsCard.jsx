@@ -5,6 +5,7 @@ import { GoRepo } from "react-icons/go";
 const ProjectCard = ({ project }) => {
     const { name, description, repo, live, images = [] } = project;
     const [hovered, setHovered] = useState(false);
+    const [showMore, setShowMore] = useState(false);
 
     const fanConfig = [
         { rotate: 0, x: 0, y: 0, z: 30 }, // top (first image)
@@ -40,9 +41,7 @@ const ProjectCard = ({ project }) => {
 
             <div className="flex-1 min-w-0 text-center sm:text-left">
                 <h3 className="text-xl font-semibold text-black">{name}</h3>
-                <p className="mt-2 text-sm text-gray-700 leading-relaxed">
-                    {description}
-                </p>
+                {/* Mobile: 3 lines + See more */} <div className="mt-2 text-sm leading-relaxed text-gray-700"> <p className={showMore ? "" : "line-clamp-3 sm:line-clamp-none"} > {description} </p> <button type="button" onClick={() => setShowMore((prev) => !prev)} className="mt-1 text-sm font-medium text-purple-600 hover:text-purple-700 sm:hidden" > {showMore ? "See less" : "See more"} </button> </div>
 
                 <div className="mt-5 flex items-center justify-center sm:justify-start gap-3">
                     {live && (
@@ -52,7 +51,7 @@ const ProjectCard = ({ project }) => {
                             rel="noopener noreferrer"
                             className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-purple-600 hover:bg-purple-700 text-white text-sm font-medium transition-colors"
                         >
-                            <MdLink className="text-xl"/>
+                            <MdLink className="text-xl" />
                             Live
                         </a>
                     )}
@@ -61,8 +60,8 @@ const ProjectCard = ({ project }) => {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="inline-flex items-center gap-1.5 px-4 py-2 rounded-lg bg-neutral-800 hover:bg-neutral-700 text-neutral-100 text-sm font-medium transition-colors"
-                    >   
-                        <GoRepo/>
+                    >
+                        <GoRepo />
                         Repo
                     </a>
                 </div>
