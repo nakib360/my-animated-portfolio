@@ -137,57 +137,59 @@ const About = () => {
                   className={
                     isLastColumn
                       ? `
-                        /* Mobile: expand toward LEFT */
-                        relative
-                        mr-[50%]
-                        flex
-                        w-[calc(100%-50%)]
-                        min-w-0
-                        flex-col
-                        items-end
-                        pt-4
+                  /* Mobile: expand toward LEFT + stagger down */
+                  relative
+                  mr-[50%]
+                  flex
+                  w-[calc(100%-50%)]
+                  min-w-0
+                  flex-col
+                  items-end
+                  pt-8
 
-                        before:absolute
-                        before:right-0
-                        before:top-0
-                        before:h-4
-                        before:w-px
-                        before:bg-gray-400
+                  before:absolute
+                  before:right-0
+                  before:top-0
+                  before:h-8
+                  before:w-px
+                  before:bg-gray-400
 
-                        /* Desktop: restore original RIGHT direction */
-                        sm:mr-0
-                        sm:ml-[45%]
-                        sm:w-[calc(100%-45%)]
-                        sm:items-start
-                        sm:before:left-0
-                        sm:before:right-auto
+                  /* Desktop: restore original RIGHT direction */
+                  sm:mr-0
+                  sm:ml-[45%]
+                  sm:w-[calc(100%-45%)]
+                  sm:items-start
+                  sm:pt-4
+                  sm:before:left-0
+                  sm:before:right-auto
+                  sm:before:h-4
 
-                        md:ml-[50%]
-                        md:mr-0
-                        md:w-[calc(100%-50%)]
-                      `
+                  md:ml-[50%]
+                  md:mr-0
+                  md:w-[calc(100%-50%)]
+                `
                       : `
-                        relative
-                        ml-[50%]
-                        flex
-                        w-[calc(100%-50%)]
-                        min-w-0
-                        flex-col
-                        pt-4
+                  relative
+                  ml-[50%]
+                  flex
+                  w-[calc(100%-50%)]
+                  min-w-0
+                  flex-col
+                  pt-4
 
-                        before:absolute
-                        before:left-0
-                        before:top-0
-                        before:h-4
-                        before:w-px
-                        before:bg-gray-400
+                  before:absolute
+                  before:left-0
+                  before:top-0
+                  before:h-4
+                  before:w-px
+                  before:bg-gray-400
 
-                        sm:ml-[45%]
-                        sm:w-[calc(100%-45%)]
+                  sm:ml-[45%]
+                  sm:w-[calc(100%-45%)]
 
-                        md:ml-[50%]
-                        md:w-[calc(100%-50%)]
-                      `
+                  md:ml-[50%]
+                  md:w-[calc(100%-50%)]
+                `
                   }
                 >
                   {col.items.map(({ name, icon }) => (
@@ -196,77 +198,77 @@ const About = () => {
                       className={
                         isLastColumn
                           ? `
-                            /* Mobile: connector is on RIGHT */
-                            relative
-                            flex
-                            min-w-0
-                            w-full
-                            justify-end
-                            py-2
-                            pr-5
+                      /* Mobile: connector is on RIGHT */
+                      relative
+                      flex
+                      min-w-0
+                      w-full
+                      justify-end
+                      py-2
+                      pr-8
 
-                            before:absolute
-                            before:right-0
-                            before:top-0
-                            before:h-full
-                            before:w-px
-                            before:bg-gray-400
+                      before:absolute
+                      before:right-0
+                      before:top-0
+                      before:h-full
+                      before:w-px
+                      before:bg-gray-400
 
-                            after:absolute
-                            after:right-0
-                            after:top-1/2
-                            after:h-px
-                            after:w-4
-                            after:bg-gray-400
+                      after:absolute
+                      after:right-0
+                      after:top-1/2
+                      after:h-px
+                      after:w-4
+                      after:bg-gray-400
 
-                            last:before:h-1/2
+                      last:before:h-1/2
 
-                            /* Desktop: original LEFT connector */
-                            sm:justify-start
-                            sm:pr-0
-                            sm:pl-5
+                      /* Desktop: original LEFT connector */
+                      sm:justify-start
+                      sm:pr-0
+                      sm:pl-5
 
-                            sm:before:left-0
-                            sm:before:right-auto
+                      sm:before:left-0
+                      sm:before:right-auto
 
-                            sm:after:left-0
-                            sm:after:right-auto
+                      sm:after:left-0
+                      sm:after:right-auto
 
-                            sm:pl-7
-                            sm:after:w-6
-                          `
+                      sm:pl-7
+                      sm:after:w-6
+                    `
                           : `
-                            relative
-                            min-w-0
-                            py-2
-                            pl-5
+                      relative
+                      min-w-0
+                      py-2
+                      pl-5
 
-                            before:absolute
-                            before:left-0
-                            before:top-0
-                            before:h-full
-                            before:w-px
-                            before:bg-gray-400
+                      before:absolute
+                      before:left-0
+                      before:top-0
+                      before:h-full
+                      before:w-px
+                      before:bg-gray-400
 
-                            last:before:h-1/2
+                      last:before:h-1/2
 
-                            after:absolute
-                            after:left-0
-                            after:top-1/2
-                            after:h-px
-                            after:w-4
-                            after:bg-gray-400
+                      after:absolute
+                      after:left-0
+                      after:top-1/2
+                      after:h-px
+                      after:w-4
+                      after:bg-gray-400
 
-                            sm:pl-7
-                            sm:after:w-6
-                          `
+                      sm:pl-7
+                      sm:after:w-6
+                    `
                       }
                     >
                       <div
                         className={
                           isLastColumn
-                            ? "flex min-w-0 flex-row-reverse items-center justify-end gap-1.5 text-right sm:flex-row sm:justify-start sm:text-left sm:gap-2"
-                            : "flex min-w-0 items-center gap-1.5 sm:gap-2"
+                            ? "flex w-max max-w-none flex-row-reverse items-center justify-end gap-1.5 pr-1 text-right sm:flex-row sm:justify-start sm:gap-2 sm:pr-0 sm:text-left"
+                            : "flex w-max max-w-none items-center gap-1.5 sm:gap-2"
                         }
                       >
                         <img
@@ -275,7 +277,7 @@ const About = () => {
                           className="h-4 w-4 shrink-0 object-contain sm:h-5 sm:w-5"
                         />
 
-                        <span className="min-w-0  text-[10px] leading-tight sm:text-sm">
+                        <span className="whitespace-nowrap text-[10px] leading-tight sm:text-sm">
                           {name}
                         </span>
                       </div>
@@ -332,14 +334,14 @@ const About = () => {
               <div className="h-8 w-px bg-gray-400" />
 
               {/* Card */}
-              <div className="w-full max-w-[260px] overflow-hidden rounded-lg border border-gray-400 sm:max-w-xs">
+              <div className="flex h-full w-full max-w-[260px] flex-col overflow-hidden rounded-lg border border-gray-400 sm:max-w-xs">
                 <img
                   src={edu.campas}
                   alt={edu.name}
-                  className="h-24 w-full object-cover sm:h-32"
+                  className="h-24 w-full shrink-0 object-cover sm:h-32"
                 />
 
-                <div className="flex min-w-0 items-center gap-2 p-2 sm:gap-3 sm:p-3">
+                <div className="flex min-h-[58px] flex-1 items-center gap-2 p-2 sm:min-h-[68px] sm:gap-3 sm:p-3">
                   <img
                     src={edu.logo}
                     alt=""

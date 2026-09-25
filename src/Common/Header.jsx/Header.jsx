@@ -221,8 +221,8 @@ const Header = () => {
             transition-all
             duration-500
             md:hidden
-            w-full 
-            px-3
+            w-full
+            px-10
             ${
               isFloating
                 ? "translate-y-0 opacity-100"

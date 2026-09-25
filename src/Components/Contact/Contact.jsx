@@ -98,7 +98,7 @@ const Contact = () => {
     };
 
     return (
-        <section className="relative w-full px-5">
+        <section className="relative w-full px-5 mb-10 md:mb-0">
             {/* Toast */}
             <div
                 className={`fixed right-5 top-5 z-50 w-[calc(100%-2.5rem)] max-w-sm transition-all duration-500 ${toast.show
