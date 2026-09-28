@@ -190,10 +190,10 @@ const About = () => {
         variants={treeContainer}
         initial="hidden"
         whileInView="visible"
-        viewport={{
-          once: true,
-          amount: 0.12,
-        }}
+        // viewport={{
+        //   once: true,
+        //   amount: 0.12,
+        // }}
       >
         {/* ================= Root ================= */}
         <motion.div
@@ -541,10 +541,10 @@ const About = () => {
         variants={treeContainer}
         initial="hidden"
         whileInView="visible"
-        viewport={{
-          once: true,
-          amount: 0.12,
-        }}
+        // viewport={{
+        //   once: true,
+        //   amount: 0.12,
+        // }}
       >
         {/* ================= Root ================= */}
         <motion.div
