@@ -1,5 +1,5 @@
-
 import { RoughNotation } from "react-rough-notation";
+import { motion } from "motion/react";
 
 // Frontend
 import HtmlLogo from "../../assets/HTML.png";
@@ -70,6 +70,98 @@ const About = () => {
     },
   ];
 
+  /* =========================================================
+     Motion Variants
+  ========================================================= */
+
+  const treeContainer = {
+    hidden: {},
+    visible: {
+      transition: {
+        staggerChildren: 0.12,
+      },
+    },
+  };
+
+  const horizontalLine = {
+    hidden: {
+      scaleX: 0,
+      opacity: 0,
+    },
+    visible: {
+      scaleX: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.45,
+        ease: "easeInOut",
+      },
+    },
+  };
+
+  const verticalLine = {
+    hidden: {
+      scaleY: 0,
+      opacity: 0,
+    },
+    visible: {
+      scaleY: 1,
+      opacity: 1,
+      transition: {
+        duration: 0.4,
+        ease: "easeInOut",
+      },
+    },
+  };
+
+  const treeBox = {
+    hidden: {
+      opacity: 0,
+      y: 8,
+      scale: 0.96,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.4,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const toolText = {
+    hidden: {
+      opacity: 0,
+      scale: 0.92,
+    },
+    visible: {
+      opacity: 1,
+      scale: 1,
+      transition: {
+        duration: 0.3,
+        ease: "easeOut",
+      },
+    },
+  };
+
+  const educationCard = {
+    hidden: {
+      opacity: 0,
+      y: 15,
+      scale: 0.96,
+    },
+    visible: {
+      opacity: 1,
+      y: 0,
+      scale: 1,
+      transition: {
+        duration: 0.5,
+        ease: "easeOut",
+      },
+    },
+  };
+
   return (
     <div className="w-full overflow-hidden">
       {/* ================= About ================= */}
@@ -89,252 +181,459 @@ const About = () => {
         </h2>
       </section>
 
-      {/* ================= Skills Tree ================= */}
-      <div className="mt-10 w-full px-3 sm:px-5">
-        {/* Root */}
-        <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center">
-          <div className="flex min-w-0 items-center">
-            <p className="shrink-0 rounded border border-gray-400 px-2 py-1 text-xs sm:px-4 sm:text-base">
-              Skills
-            </p>
+      {/* =========================================================
+          ================= SKILLS TREE ==========================
+      ========================================================= */}
 
-            <hr className="min-w-2 flex-1 border-t border-gray-400 sm:min-w-4" />
+      <motion.div
+        className="mt-10 w-full px-3 sm:px-5"
+        variants={treeContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{
+          once: true,
+          amount: 0.12,
+        }}
+      >
+        {/* ================= Root ================= */}
+        <motion.div
+          className="grid w-full grid-cols-[1fr_auto_1fr] items-center"
+          variants={treeContainer}
+        >
+          <div className="flex min-w-0 items-center">
+            {/* Skills */}
+            <motion.p
+              variants={treeBox}
+              className="shrink-0 rounded border border-gray-400 px-2 py-1 text-xs sm:px-4 sm:text-base"
+            >
+              Skills
+            </motion.p>
+
+            {/* Root horizontal line */}
+            <motion.div
+              variants={horizontalLine}
+              className="min-w-2 flex-1 origin-left border-t border-gray-400 sm:min-w-4"
+            />
           </div>
 
-          <p className="shrink-0 rounded border border-gray-400 px-2 py-1 text-center text-xs sm:px-4 sm:text-base">
+          {/* Web Development */}
+          <motion.p
+            variants={treeBox}
+            className="shrink-0 rounded border border-gray-400 px-2 py-1 text-center text-xs sm:px-4 sm:text-base"
+          >
             Web Development
-          </p>
+          </motion.p>
 
           <div />
-        </div>
+        </motion.div>
 
-        {/* Root vertical line */}
-        <div className="mx-auto h-8 w-px bg-gray-400" />
+        {/* ================= Root vertical line ================= */}
+        <motion.div
+          variants={verticalLine}
+          className="mx-auto h-8 w-px origin-top bg-gray-400"
+        />
 
-        {/* Main branches */}
-        <div className="relative grid w-full grid-cols-3">
+        {/* ================= Main branches ================= */}
+        <motion.div
+          className="relative grid w-full grid-cols-3"
+          variants={treeContainer}
+        >
           {/* Main horizontal line */}
-          <div className="absolute top-0 left-[16.6667%] right-[16.6667%] border-t border-gray-400" />
+          <motion.div
+            variants={horizontalLine}
+            className="absolute top-0 left-[16.6667%] right-[16.6667%] origin-center border-t border-gray-400"
+          />
 
           {columns.map((col, columnIndex) => {
-            const isLastColumn = columnIndex === columns.length - 1;
+            const isLastColumn =
+              columnIndex === columns.length - 1;
 
             return (
-              <div
+              <motion.div
                 key={col.title}
+                variants={treeContainer}
                 className="flex min-w-0 flex-col items-center"
               >
                 {/* Branch vertical line */}
-                <div className="h-8 w-px bg-gray-400" />
+                <motion.div
+                  variants={verticalLine}
+                  className="h-8 w-px origin-top bg-gray-400"
+                />
 
                 {/* Branch title */}
-                <p className="max-w-[95%] rounded border border-gray-400 px-1.5 py-1 text-center text-[10px] leading-tight sm:px-4 sm:text-sm md:text-base">
+                <motion.p
+                  variants={treeBox}
+                  className="max-w-[95%] rounded border border-gray-400 px-1.5 py-1 text-center text-[10px] leading-tight sm:px-4 sm:text-sm md:text-base"
+                >
                   {col.title}
-                </p>
+                </motion.p>
 
                 {/* ================= Items Tree ================= */}
                 <div
                   className={
                     isLastColumn
                       ? `
-                  /* Mobile: expand toward LEFT + stagger down */
-                  relative
-                  mr-[50%]
-                  flex
-                  w-[50%]
-                  min-w-0
-                  flex-col
-                  items-end
-                  pt-8
+                        relative
+                        mr-[50%]
+                        flex
+                        w-[50%]
+                        min-w-0
+                        flex-col
+                        items-end
+                        pt-8
 
-                  before:absolute
-                  before:right-0
-                  before:top-0
-                  before:h-8
-                  before:w-px
-                  before:bg-gray-400
+                        before:absolute
+                        before:right-0
+                        before:top-0
+                        before:h-8
+                        before:w-px
+                        before:bg-gray-400
 
-                  /* Desktop: restore original RIGHT direction */
-                  sm:mr-0
-                  sm:ml-[45%]
-                  sm:w-[55%]
-                  sm:items-start
-                  sm:pt-4
-                  sm:before:left-0
-                  sm:before:right-auto
-                  sm:before:h-4
+                        sm:mr-0
+                        sm:ml-[45%]
+                        sm:w-[55%]
+                        sm:items-start
+                        sm:pt-4
 
-                  md:ml-[50%]
-                  md:mr-0
-                  md:w-[50%]
-                `
+                        sm:before:left-0
+                        sm:before:right-auto
+                        sm:before:h-4
+
+                        md:ml-[50%]
+                        md:mr-0
+                        md:w-[50%]
+                      `
                       : `
-                  relative
-                  ml-[50%]
-                  flex
-                  w-[50%]
-                  min-w-0
-                  flex-col
-                  pt-4
+                        relative
+                        ml-[50%]
+                        flex
+                        w-[50%]
+                        min-w-0
+                        flex-col
+                        pt-4
 
-                  before:absolute
-                  before:left-0
-                  before:top-0
-                  before:h-4
-                  before:w-px
-                  before:bg-gray-400
+                        before:absolute
+                        before:left-0
+                        before:top-0
+                        before:h-4
+                        before:w-px
+                        before:bg-gray-400
 
-                  sm:ml-[45%]
-                  sm:w-[55%]
+                        sm:ml-[45%]
+                        sm:w-[55%]
 
-                  md:ml-[50%]
-                  md:w-[50%]
-                `
+                        md:ml-[50%]
+                        md:w-[50%]
+                      `
                   }
                 >
-                  {col.items.map(({ name, icon }) => (
-                    <div
-                      key={name}
-                      className={
-                        isLastColumn
-                          ? `
-                      /* Mobile: connector is on RIGHT */
-                      relative
-                      flex
-                      min-w-0
-                      w-full
-                      justify-end
-                      py-2
-                      pr-8
+                  {col.items.map(({ name, icon }, itemIndex) => {
+                    const isLastItem =
+                      itemIndex === col.items.length - 1;
 
-                      before:absolute
-                      before:right-0
-                      before:top-0
-                      before:h-full
-                      before:w-px 
-                      before:bg-gray-400
+                    const itemDelay = itemIndex * 0.55;
 
-                      after:absolute
-                      after:right-0
-                      after:top-1/2
-                      after:h-px
-                      after:w-4
-                      after:bg-gray-400
-
-                      last:before:h-1/2
-
-                      /* Desktop: original LEFT connector */
-                      sm:justify-start
-                      sm:pr-0
-                      sm:pl-5
-
-                      sm:before:left-0
-                      sm:before:right-auto
-
-                      sm:after:left-0
-                      sm:after:right-auto
-
-                      sm:pl-7
-                      sm:after:w-6
-                    `
-                          : `
-                      relative
-                      min-w-0
-                      py-2
-                      pl-5
-
-                      before:absolute
-                      before:left-0
-                      before:top-0
-                      before:h-full
-                      before:w-px
-                      before:bg-gray-400
-
-                      last:before:h-1/2
-
-                      after:absolute
-                      after:left-0
-                      after:top-1/2
-                      after:h-px
-                      after:w-4
-                      after:bg-gray-400
-
-                      sm:pl-7
-                      sm:after:w-6
-                    `
-                      }
-                    >
+                    return (
                       <div
+                        key={name}
                         className={
                           isLastColumn
-                            ? "flex w-max max-w-none flex-row-reverse items-center justify-end gap-1.5 pr-1 text-right sm:flex-row sm:justify-start sm:gap-2 sm:pr-0 sm:text-left"
-                            : "flex w-max max-w-none items-center gap-1.5 sm:gap-2"
+                            ? `
+                              relative
+                              flex
+                              min-w-0
+                              w-full
+                              justify-end
+                              py-2
+                              pr-8
+
+                              sm:justify-start
+                              sm:pr-0
+                              sm:pl-7
+                            `
+                            : `
+                              relative
+                              min-w-0
+                              py-2
+                              pl-5
+
+                              sm:pl-7
+                            `
                         }
                       >
-                        <img
-                          src={icon}
-                          alt={name}
-                          className="h-4 w-4 shrink-0 object-contain sm:h-5 sm:w-5"
+                        {/* Vertical connector */}
+                        <motion.div
+                          initial={{
+                            scaleY: 0,
+                            opacity: 0,
+                          }}
+                          whileInView={{
+                            scaleY: 1,
+                            opacity: 1,
+                          }}
+                          transition={{
+                            duration: 0.4,
+                            delay: itemDelay,
+                            ease: "easeInOut",
+                          }}
+                          // viewport={{
+                          //   once: true,
+                          //   amount: 0.1,
+                          // }}
+                          className={
+                            isLastColumn
+                              ? `
+                                absolute
+                                right-0
+                                top-0
+                                ${
+                                  isLastItem
+                                    ? "h-1/2"
+                                    : "h-full"
+                                }
+                                w-px
+                                origin-top
+                                bg-gray-400
+
+                                sm:left-0
+                                sm:right-auto
+                              `
+                              : `
+                                absolute
+                                left-0
+                                top-0
+                                ${
+                                  isLastItem
+                                    ? "h-1/2"
+                                    : "h-full"
+                                }
+                                w-px
+                                origin-top
+                                bg-gray-400
+                              `
+                          }
                         />
 
-                        <span className="whitespace-nowrap text-[10px] leading-tight sm:text-sm">
-                          {name}
-                        </span>
+                        {/* Horizontal connector */}
+                        <motion.div
+                          initial={{
+                            scaleX: 0,
+                            opacity: 0,
+                          }}
+                          whileInView={{
+                            scaleX: 1,
+                            opacity: 1,
+                          }}
+                          transition={{
+                            duration: 0.3,
+                            delay: itemDelay + 0.4,
+                            ease: "easeOut",
+                          }}
+                          // viewport={{
+                          //   once: true,
+                          //   amount: 0.1,
+                          // }}
+                          className={
+                            isLastColumn
+                              ? `
+                                absolute
+                                right-0
+                                top-1/2
+                                h-px
+                                w-4
+                                origin-right
+                                bg-gray-400
+
+                                sm:left-0
+                                sm:right-auto
+                                sm:w-6
+                                sm:origin-left
+                              `
+                              : `
+                                absolute
+                                left-0
+                                top-1/2
+                                h-px
+                                w-4
+                                origin-left
+                                bg-gray-400
+
+                                sm:w-6
+                              `
+                          }
+                        />
+
+                        {/* Tool */}
+                        <motion.div
+                          initial={{
+                            opacity: 0,
+                            scale: 0.9,
+                          }}
+                          whileInView={{
+                            opacity: 1,
+                            scale: 1,
+                          }}
+                          transition={{
+                            duration: 0.3,
+                            delay: itemDelay + 0.7,
+                            ease: "easeOut",
+                          }}
+                          // viewport={{
+                          //   once: true,
+                          //   amount: 0.1,
+                          // }}
+                          className={
+                            isLastColumn
+                              ? `
+                                flex
+                                w-max
+                                max-w-none
+                                flex-row-reverse
+                                items-center
+                                justify-end
+                                gap-1.5
+                                pr-1
+                                text-right
+
+                                sm:flex-row
+                                sm:justify-start
+                                sm:gap-2
+                                sm:pr-0
+                                sm:text-left
+                              `
+                              : `
+                                flex
+                                w-max
+                                max-w-none
+                                items-center
+                                gap-1.5
+
+                                sm:gap-2
+                              `
+                          }
+                        >
+                          <img
+                            src={icon}
+                            alt={name}
+                            className="h-4 w-4 shrink-0 object-contain sm:h-5 sm:w-5"
+                          />
+
+                          <span className="whitespace-nowrap text-[10px] leading-tight sm:text-sm">
+                            {name}
+                          </span>
+                        </motion.div>
                       </div>
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
-              </div>
+              </motion.div>
             );
           })}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
 
-      {/* ================= Education Tree ================= */}
-      <div className="mt-16 w-full px-3 sm:px-5">
-        {/* Root */}
-        <div className="grid w-full grid-cols-[1fr_auto_1fr] items-center">
+      {/* =========================================================
+          ================= EDUCATION TREE ========================
+      ========================================================= */}
+
+      <motion.div
+        className="mt-16 w-full px-3 sm:px-5"
+        variants={treeContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={{
+          once: true,
+          amount: 0.12,
+        }}
+      >
+        {/* ================= Root ================= */}
+        <motion.div
+          className="grid w-full grid-cols-[1fr_auto_1fr] items-center"
+          variants={treeContainer}
+        >
           <div className="flex min-w-0 items-center">
-            <p className="shrink-0 rounded border border-gray-400 px-2 py-1 text-xs sm:px-4 sm:text-base">
+            {/* Education */}
+            <motion.p
+              variants={treeBox}
+              className="shrink-0 rounded border border-gray-400 px-2 py-1 text-xs sm:px-4 sm:text-base"
+            >
               Education
-            </p>
+            </motion.p>
 
-            <hr className="min-w-2 flex-1 border-t border-gray-400 sm:min-w-4" />
+            {/* Root horizontal line */}
+            <motion.div
+              variants={horizontalLine}
+              className="min-w-2 flex-1 origin-left border-t border-gray-400 sm:min-w-4"
+            />
           </div>
 
-          <p className="shrink-0 rounded border border-gray-400 px-2 py-1 text-center text-xs sm:px-4 sm:text-base">
+          {/* Academic Background */}
+          <motion.p
+            variants={treeBox}
+            className="shrink-0 rounded border border-gray-400 px-2 py-1 text-center text-xs sm:px-4 sm:text-base"
+          >
             Academic Background
-          </p>
+          </motion.p>
 
           <div />
-        </div>
+        </motion.div>
 
-        {/* Root vertical line */}
-        <div className="mx-auto h-8 w-px bg-gray-400" />
+        {/* ================= Root vertical line ================= */}
+        <motion.div
+          variants={verticalLine}
+          className="mx-auto h-8 w-px origin-top bg-gray-400"
+        />
 
-        {/* Education branches */}
-        <div className="relative grid w-full grid-cols-2">
+        {/* ================= Education branches ================= */}
+        <motion.div
+          className="relative grid w-full grid-cols-2"
+          variants={treeContainer}
+        >
           {/* Main horizontal line */}
-          <div className="absolute top-0 left-1/4 right-1/4 border-t border-gray-400" />
+          <motion.div
+            variants={horizontalLine}
+            className="absolute top-0 left-1/4 right-1/4 origin-center border-t border-gray-400"
+          />
 
-          {education.map((edu) => (
-            <div
+          {education.map((edu, index) => (
+            <motion.div
               key={edu.title}
+              variants={treeContainer}
               className="flex min-w-0 flex-col items-center px-1 sm:px-4"
             >
               {/* Branch vertical line */}
-              <div className="h-8 w-px bg-gray-400" />
+              <motion.div
+                variants={verticalLine}
+                className="h-8 w-px origin-top bg-gray-400"
+              />
 
               {/* Education title */}
-              <p className="max-w-full rounded border border-gray-400 px-2 py-1 text-center text-[10px] leading-tight sm:px-4 sm:text-sm md:text-base">
+              <motion.p
+                variants={treeBox}
+                className="max-w-full rounded border border-gray-400 px-2 py-1 text-center text-[10px] leading-tight sm:px-4 sm:text-sm md:text-base"
+              >
                 {edu.title}
-              </p>
+              </motion.p>
 
               {/* Connector */}
-              <div className="h-8 w-px bg-gray-400" />
+              <motion.div
+                variants={verticalLine}
+                // viewport={{
+                //   once: true,
+                //   amount: 0.1,
+                // }}
+                className="h-8 w-px origin-top bg-gray-400"
+              />
 
-              {/* Card */}
-              <div className="flex h-full w-full max-w-65 flex-col overflow-hidden rounded-lg border border-gray-400 sm:max-w-xs">
+              {/* Education card */}
+              <motion.div
+                variants={educationCard}
+                // viewport={{
+                //   once: true,
+                //   amount: 0.1,
+                // }}
+                className="flex h-full w-full max-w-65 flex-col overflow-hidden rounded-lg border border-gray-400 sm:max-w-xs"
+              >
                 <img
                   src={edu.campas}
                   alt={edu.name}
@@ -352,11 +651,11 @@ const About = () => {
                     {edu.name}
                   </span>
                 </div>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           ))}
-        </div>
-      </div>
+        </motion.div>
+      </motion.div>
     </div>
   );
 };

@@ -14,7 +14,7 @@ const Home = () => {
           xmlns="http://www.w3.org/2000/svg"
         >
           <defs>
-            <pattern
+            <pattern 
               id="grid"
               width="160"
               height="160"
@@ -92,7 +92,7 @@ const Home = () => {
             </motion.p>
           </div>
           <motion.div
-            initial={{ x: 300, opacity: 0, filter: "blur(10px)" }}
+            initial={{ x: 10, opacity: 0, filter: "blur(10px)" }}
             whileInView={{ x: 0, opacity: 1, filter: "blur(0px)" }}
             transition={{ duration: 1 }}
             className="absolute right-3 bottom-20 md:right-15 md:bottom-30 z-20 w-full max-w-1/2 md:max-w-1/2 lg:max-w-1/3 rounded-tl-xl rounded-br-xl  bg-white/10 p-2 md:p-3 uppercase shadow-xs shadow-black/20 backdrop-blur-md">
