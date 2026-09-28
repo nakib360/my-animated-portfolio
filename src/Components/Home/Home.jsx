@@ -1,6 +1,7 @@
 import Header from "../../Common/Header.jsx/Header";
 import CyberpunkGlowBackground from "./CyberpunkGlowBackground";
 import Author from "../../assets/author.png";
+import { motion } from "motion/react"
 
 const Home = () => {
   return (
@@ -40,12 +41,18 @@ const Home = () => {
         <div className="relative z-10 min-h-150 md:min-h-162.5">
           <Header />
           {/* Big background NAKIB */}
-          <p
+          <motion.p
+            initial={{ opacity: 0 }}
+            whileInView={{ opacity: 1 }}
+            transition={{ duration: 1 }}
             className="pointer-events-none text-[7rem] md:text-[15rem] lg:text-[20rem] absolute left-0 top-[25%] md:top-[14%] w-full select-none whitespace-nowrap bg-linear-to-b from-white/30 via-white/10 to-white/5 bg-clip-text text-center font-bold leading-none tracking-tight text-transparent sm:top-[11%] lg:top-[9%]"
           >
             NAKIB
-          </p>
-          <img
+          </motion.p>
+          <motion.img
+            initial={{ y: 500, opacity: 0 }}
+            whileInView={{ y: 0, opacity: 1 }}
+            transition={{ duration: 1 }}
             className="absolute bottom-0 left-1/2 z-10 w-auto max-w-none -translate-x-1/2 select-none object-contain object-bottom h-112 sm:h-120 md:h-128 lg:h-140"
             src={Author}
             alt="Nakib"
@@ -65,25 +72,35 @@ const Home = () => {
           />
           <div className="absolute bottom-3 left-2 z-20 flex flex-col md:left-10 lg:left-80 justify-start items-start">
             {/* Subheading */}
-            <p
+            <motion.p
+              initial={{ filter: "blur(10px)" }}
+              whileInView={{ filter: "blur(0px)" }}
+              transition={{ duration: 1 }}
               className="pointer-events-none text-[1.1rem] md:text-[1.7rem] lg:text-[2rem] select-none whitespace-nowrap font-medium uppercase leading-none tracking-[0.3em] text-white/70"
             >
               Developer
-            </p>
+            </motion.p>
 
             {/* Main heading */}
-            <p
+            <motion.p
+              initial={{ filter: "blur(10px)" }}
+              whileInView={{ filter: "blur(0px)" }}
+              transition={{ duration: 1 }}
               className="pointer-events-none text-[4rem] md:text-[6rem] lg:text-[7rem] select-none whitespace-nowrap font-bold leading-none tracking-tight text-white ml-[-0.06em]"
             >
               NAKIB
-            </p>
+            </motion.p>
           </div>
-          <div className="absolute right-3 bottom-20 md:right-15 md:bottom-30 z-20 w-full max-w-1/2 md:max-w-1/2 lg:max-w-1/3 rounded-tl-xl rounded-br-xl  bg-white/10 p-2 md:p-3 uppercase shadow-xs shadow-black/20 backdrop-blur-md">
+          <motion.div
+            initial={{ x: 300, opacity: 0, filter: "blur(10px)" }}
+            whileInView={{ x: 0, opacity: 1, filter: "blur(0px)" }}
+            transition={{ duration: 1 }}
+            className="absolute right-3 bottom-20 md:right-15 md:bottom-30 z-20 w-full max-w-1/2 md:max-w-1/2 lg:max-w-1/3 rounded-tl-xl rounded-br-xl  bg-white/10 p-2 md:p-3 uppercase shadow-xs shadow-black/20 backdrop-blur-md">
             <p className="text-white font-semibold text-justify text-xs md:text-sm">
               Welcome! I'm Nakib Uddin, a MERN stack developer who builds fast,
               clean, and reliable web applications.
             </p>
-          </div>
+          </motion.div>
         </div>
       </div>
     </>

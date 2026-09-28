@@ -141,7 +141,7 @@ const About = () => {
                   relative
                   mr-[50%]
                   flex
-                  w-[calc(100%-50%)]
+                  w-[50%]
                   min-w-0
                   flex-col
                   items-end
@@ -157,7 +157,7 @@ const About = () => {
                   /* Desktop: restore original RIGHT direction */
                   sm:mr-0
                   sm:ml-[45%]
-                  sm:w-[calc(100%-45%)]
+                  sm:w-[55%]
                   sm:items-start
                   sm:pt-4
                   sm:before:left-0
@@ -166,13 +166,13 @@ const About = () => {
 
                   md:ml-[50%]
                   md:mr-0
-                  md:w-[calc(100%-50%)]
+                  md:w-[50%]
                 `
                       : `
                   relative
                   ml-[50%]
                   flex
-                  w-[calc(100%-50%)]
+                  w-[50%]
                   min-w-0
                   flex-col
                   pt-4
@@ -185,10 +185,10 @@ const About = () => {
                   before:bg-gray-400
 
                   sm:ml-[45%]
-                  sm:w-[calc(100%-45%)]
+                  sm:w-[55%]
 
                   md:ml-[50%]
-                  md:w-[calc(100%-50%)]
+                  md:w-[50%]
                 `
                   }
                 >
@@ -211,7 +211,7 @@ const About = () => {
                       before:right-0
                       before:top-0
                       before:h-full
-                      before:w-px
+                      before:w-px 
                       before:bg-gray-400
 
                       after:absolute
@@ -334,14 +334,14 @@ const About = () => {
               <div className="h-8 w-px bg-gray-400" />
 
               {/* Card */}
-              <div className="flex h-full w-full max-w-[260px] flex-col overflow-hidden rounded-lg border border-gray-400 sm:max-w-xs">
+              <div className="flex h-full w-full max-w-65 flex-col overflow-hidden rounded-lg border border-gray-400 sm:max-w-xs">
                 <img
                   src={edu.campas}
                   alt={edu.name}
                   className="h-24 w-full shrink-0 object-cover sm:h-32"
                 />
 
-                <div className="flex min-h-[58px] flex-1 items-center gap-2 p-2 sm:min-h-[68px] sm:gap-3 sm:p-3">
+                <div className="flex min-h-14.5 flex-1 items-center gap-2 p-2 sm:min-h-17 sm:gap-3 sm:p-3">
                   <img
                     src={edu.logo}
                     alt=""
