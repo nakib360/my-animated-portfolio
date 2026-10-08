@@ -206,7 +206,7 @@ const Header = () => {
             transition-all -> transition-colors (blink fix)
         ===================================================== */}
         <motion.a
-          href="/cv.pdf"
+          href="/CV.pdf"
           download
           aria-label="Download CV"
           initial={{ opacity: 0, x: 8 }}
