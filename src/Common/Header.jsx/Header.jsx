@@ -265,7 +265,7 @@ const Header = () => {
             fixed
             bottom-4
             left-1/2
-            z-[9999]
+            z-9999
             w-full
             -translate-x-1/2
             px-10
@@ -354,7 +354,7 @@ const Header = () => {
             fixed
             inset-x-0
             top-0
-            z-[9999]
+            z-9999
             hidden
             justify-center
             md:flex
