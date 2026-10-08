@@ -5,7 +5,7 @@ import { HiOutlineHome } from "react-icons/hi2";
 import { FaUserAstronaut, FaLaptopCode } from "react-icons/fa6";
 import { PiHandshake } from "react-icons/pi";
 import { HiOutlineDownload } from "react-icons/hi";
-import logo from "../../assets/nakib360's logo.svg";
+import logo from "../../assets/nakib uddin modern logo.png";
 
 const rout = [
   { id: 1, name: "Home", path: "#home", icon: <HiOutlineHome /> },
@@ -119,11 +119,10 @@ const Header = () => {
           ease: [0.22, 1, 0.36, 1],
         }}
         className="
-          flex flex-col gap-4
-          px-4 py-4
-          sm:px-6
-          md:flex-row md:items-center md:justify-between
-          md:px-8
+          flex items-center justify-between
+          px-4 py-3
+          sm:px-6 sm:py-4
+          md:flex-row md:px-8
           lg:px-10
         "
       >
@@ -138,7 +137,7 @@ const Header = () => {
             delay: 0.05,
             ease: "easeOut",
           }}
-          className="z-10 whitespace-nowrap text-base font-bold sm:text-lg"
+          className="z-10 shrink-0 whitespace-nowrap text-base font-bold sm:text-lg"
         >
           <img
             className="h-12 sm:h-14 md:h-15"
@@ -217,9 +216,8 @@ const Header = () => {
             ease: "easeOut",
           }}
           className="
-            absolute right-4 top-4
             z-10
-            flex items-center justify-center
+            flex shrink-0 items-center justify-center
             gap-2
             rounded-full
             border border-green-200
@@ -229,12 +227,9 @@ const Header = () => {
             transition-all
             hover:bg-green-200
             hover:text-black
-            sm:right-6
-            md:static
-            md:px-4
+            sm:px-4
             md:py-2
             md:text-sm
-            lg:right-auto
           "
         >
           <HiOutlineDownload className="text-base sm:text-lg" />
