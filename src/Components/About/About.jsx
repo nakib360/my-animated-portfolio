@@ -26,6 +26,102 @@ import BaitLogo from "../../assets/BatushSharaf.png";
 import NesariaCampas from "../../assets/Nesaria_campus.jpeg";
 import NesariaLogo from "../../assets/Nesaria.png";
 
+/* =========================================================
+   Motion config (component-এর বাইরে, যাতে re-render-এ নতুন
+   object না বানায়)
+========================================================= */
+
+// প্রতিবার scroll করে এলে animation আবার চালাতে চাইলে once: false দাও
+const viewportConfig = { once: false, amount: 0.2 };
+
+// শুধু children-দের stagger করানোর জন্য helper
+const stagger = (staggerChildren, delayChildren = 0) => ({
+  hidden: {},
+  visible: { transition: { staggerChildren, delayChildren } },
+});
+
+// Orchestration containers
+const treeContainer = stagger(0.12); // root row -> vertical line -> branches
+const rowContainer = stagger(0.08); // root row-এর ভেতরের box ও line
+const branchesContainer = stagger(0.06); // main line + columns প্রায় একসাথে
+const columnContainer = stagger(0.1); // line -> title -> items
+const itemRow = stagger(0.1); // vertical -> horizontal -> tool
+
+// Items list: fade-in হয় এবং প্রতিটা item একটু পরপর শুরু হয়
+const itemsList = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { duration: 0.2, staggerChildren: 0.09 },
+  },
+};
+
+const horizontalLine = {
+  hidden: { scaleX: 0, opacity: 0 },
+  visible: {
+    scaleX: 1,
+    opacity: 1,
+    transition: { duration: 0.35, ease: "easeInOut" },
+  },
+};
+
+const verticalLine = {
+  hidden: { scaleY: 0, opacity: 0 },
+  visible: {
+    scaleY: 1,
+    opacity: 1,
+    transition: { duration: 0.3, ease: "easeInOut" },
+  },
+};
+
+const treeBox = {
+  hidden: { opacity: 0, y: 8, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.3, ease: "easeOut" },
+  },
+};
+
+// Item-level
+const itemLineV = {
+  hidden: { scaleY: 0, opacity: 0 },
+  visible: {
+    scaleY: 1,
+    opacity: 1,
+    transition: { duration: 0.25, ease: "easeInOut" },
+  },
+};
+
+const itemLineH = {
+  hidden: { scaleX: 0, opacity: 0 },
+  visible: {
+    scaleX: 1,
+    opacity: 1,
+    transition: { duration: 0.2, ease: "easeOut" },
+  },
+};
+
+const toolText = {
+  hidden: { opacity: 0, scale: 0.9 },
+  visible: {
+    opacity: 1,
+    scale: 1,
+    transition: { duration: 0.25, ease: "easeOut" },
+  },
+};
+
+const educationCard = {
+  hidden: { opacity: 0, y: 15, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: { duration: 0.4, ease: "easeOut" },
+  },
+};
+
 const About = () => {
   const frontend = [
     { name: "HTML", icon: HtmlLogo },
@@ -70,98 +166,6 @@ const About = () => {
     },
   ];
 
-  /* =========================================================
-     Motion Variants
-  ========================================================= */
-
-  const treeContainer = {
-    hidden: {},
-    visible: {
-      transition: {
-        staggerChildren: 0.12,
-      },
-    },
-  };
-
-  const horizontalLine = {
-    hidden: {
-      scaleX: 0,
-      opacity: 0,
-    },
-    visible: {
-      scaleX: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.45,
-        ease: "easeInOut",
-      },
-    },
-  };
-
-  const verticalLine = {
-    hidden: {
-      scaleY: 0,
-      opacity: 0,
-    },
-    visible: {
-      scaleY: 1,
-      opacity: 1,
-      transition: {
-        duration: 0.4,
-        ease: "easeInOut",
-      },
-    },
-  };
-
-  const treeBox = {
-    hidden: {
-      opacity: 0,
-      y: 8,
-      scale: 0.96,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.4,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const toolText = {
-    hidden: {
-      opacity: 0,
-      scale: 0.92,
-    },
-    visible: {
-      opacity: 1,
-      scale: 1,
-      transition: {
-        duration: 0.3,
-        ease: "easeOut",
-      },
-    },
-  };
-
-  const educationCard = {
-    hidden: {
-      opacity: 0,
-      y: 15,
-      scale: 0.96,
-    },
-    visible: {
-      opacity: 1,
-      y: 0,
-      scale: 1,
-      transition: {
-        duration: 0.5,
-        ease: "easeOut",
-      },
-    },
-  };
-
   return (
     <div className="w-full overflow-hidden">
       {/* ================= About ================= */}
@@ -190,15 +194,12 @@ const About = () => {
         variants={treeContainer}
         initial="hidden"
         whileInView="visible"
-        // viewport={{
-        //   once: true,
-        //   amount: 0.12,
-        // }}
+        viewport={viewportConfig}
       >
         {/* ================= Root ================= */}
         <motion.div
           className="grid w-full grid-cols-[1fr_auto_1fr] items-center"
-          variants={treeContainer}
+          variants={rowContainer}
         >
           <div className="flex min-w-0 items-center">
             {/* Skills */}
@@ -236,7 +237,7 @@ const About = () => {
         {/* ================= Main branches ================= */}
         <motion.div
           className="relative grid w-full grid-cols-3"
-          variants={treeContainer}
+          variants={branchesContainer}
         >
           {/* Main horizontal line */}
           <motion.div
@@ -245,13 +246,12 @@ const About = () => {
           />
 
           {columns.map((col, columnIndex) => {
-            const isLastColumn =
-              columnIndex === columns.length - 1;
+            const isLastColumn = columnIndex === columns.length - 1;
 
             return (
               <motion.div
                 key={col.title}
-                variants={treeContainer}
+                variants={columnContainer}
                 className="flex min-w-0 flex-col items-center"
               >
                 {/* Branch vertical line */}
@@ -269,7 +269,8 @@ const About = () => {
                 </motion.p>
 
                 {/* ================= Items Tree ================= */}
-                <div
+                <motion.div
+                  variants={itemsList}
                   className={
                     isLastColumn
                       ? `
@@ -328,14 +329,12 @@ const About = () => {
                   }
                 >
                   {col.items.map(({ name, icon }, itemIndex) => {
-                    const isLastItem =
-                      itemIndex === col.items.length - 1;
-
-                    const itemDelay = itemIndex * 0.55;
+                    const isLastItem = itemIndex === col.items.length - 1;
 
                     return (
-                      <div
+                      <motion.div
                         key={name}
+                        variants={itemRow}
                         className={
                           isLastColumn
                             ? `
@@ -363,34 +362,14 @@ const About = () => {
                       >
                         {/* Vertical connector */}
                         <motion.div
-                          initial={{
-                            scaleY: 0,
-                            opacity: 0,
-                          }}
-                          whileInView={{
-                            scaleY: 1,
-                            opacity: 1,
-                          }}
-                          transition={{
-                            duration: 0.4,
-                            delay: itemDelay,
-                            ease: "easeInOut",
-                          }}
-                          // viewport={{
-                          //   once: true,
-                          //   amount: 0.1,
-                          // }}
+                          variants={itemLineV}
                           className={
                             isLastColumn
                               ? `
                                 absolute
                                 right-0
                                 top-0
-                                ${
-                                  isLastItem
-                                    ? "h-1/2"
-                                    : "h-full"
-                                }
+                                ${isLastItem ? "h-1/2" : "h-full"}
                                 w-px
                                 origin-top
                                 bg-gray-400
@@ -402,11 +381,7 @@ const About = () => {
                                 absolute
                                 left-0
                                 top-0
-                                ${
-                                  isLastItem
-                                    ? "h-1/2"
-                                    : "h-full"
-                                }
+                                ${isLastItem ? "h-1/2" : "h-full"}
                                 w-px
                                 origin-top
                                 bg-gray-400
@@ -416,23 +391,7 @@ const About = () => {
 
                         {/* Horizontal connector */}
                         <motion.div
-                          initial={{
-                            scaleX: 0,
-                            opacity: 0,
-                          }}
-                          whileInView={{
-                            scaleX: 1,
-                            opacity: 1,
-                          }}
-                          transition={{
-                            duration: 0.3,
-                            delay: itemDelay + 0.4,
-                            ease: "easeOut",
-                          }}
-                          // viewport={{
-                          //   once: true,
-                          //   amount: 0.1,
-                          // }}
+                          variants={itemLineH}
                           className={
                             isLastColumn
                               ? `
@@ -465,23 +424,7 @@ const About = () => {
 
                         {/* Tool */}
                         <motion.div
-                          initial={{
-                            opacity: 0,
-                            scale: 0.9,
-                          }}
-                          whileInView={{
-                            opacity: 1,
-                            scale: 1,
-                          }}
-                          transition={{
-                            duration: 0.3,
-                            delay: itemDelay + 0.7,
-                            ease: "easeOut",
-                          }}
-                          // viewport={{
-                          //   once: true,
-                          //   amount: 0.1,
-                          // }}
+                          variants={toolText}
                           className={
                             isLastColumn
                               ? `
@@ -522,10 +465,10 @@ const About = () => {
                             {name}
                           </span>
                         </motion.div>
-                      </div>
+                      </motion.div>
                     );
                   })}
-                </div>
+                </motion.div>
               </motion.div>
             );
           })}
@@ -541,15 +484,12 @@ const About = () => {
         variants={treeContainer}
         initial="hidden"
         whileInView="visible"
-        // viewport={{
-        //   once: true,
-        //   amount: 0.12,
-        // }}
+        viewport={viewportConfig}
       >
         {/* ================= Root ================= */}
         <motion.div
           className="grid w-full grid-cols-[1fr_auto_1fr] items-center"
-          variants={treeContainer}
+          variants={rowContainer}
         >
           <div className="flex min-w-0 items-center">
             {/* Education */}
@@ -587,7 +527,7 @@ const About = () => {
         {/* ================= Education branches ================= */}
         <motion.div
           className="relative grid w-full grid-cols-2"
-          variants={treeContainer}
+          variants={branchesContainer}
         >
           {/* Main horizontal line */}
           <motion.div
@@ -595,10 +535,10 @@ const About = () => {
             className="absolute top-0 left-1/4 right-1/4 origin-center border-t border-gray-400"
           />
 
-          {education.map((edu, index) => (
+          {education.map((edu) => (
             <motion.div
               key={edu.title}
-              variants={treeContainer}
+              variants={columnContainer}
               className="flex min-w-0 flex-col items-center px-1 sm:px-4"
             >
               {/* Branch vertical line */}
@@ -618,20 +558,12 @@ const About = () => {
               {/* Connector */}
               <motion.div
                 variants={verticalLine}
-                // viewport={{
-                //   once: true,
-                //   amount: 0.1,
-                // }}
                 className="h-8 w-px origin-top bg-gray-400"
               />
 
               {/* Education card */}
               <motion.div
                 variants={educationCard}
-                // viewport={{
-                //   once: true,
-                //   amount: 0.1,
-                // }}
                 className="flex h-full w-full max-w-65 flex-col overflow-hidden rounded-lg border border-gray-400 sm:max-w-xs"
               >
                 <img

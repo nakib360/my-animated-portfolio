@@ -203,6 +203,7 @@ const Header = () => {
 
         {/* =====================================================
             DOWNLOAD CV
+            transition-all -> transition-colors (blink fix)
         ===================================================== */}
         <motion.a
           href="/cv.pdf"
@@ -211,7 +212,7 @@ const Header = () => {
           initial={{ opacity: 0, x: 8 }}
           whileInView={{ opacity: 1, x: 0 }}
           transition={{
-            duration: 1,
+            duration: 0.5,
             delay: 0.2,
             ease: "easeOut",
           }}
@@ -224,7 +225,7 @@ const Header = () => {
             px-3 py-2
             text-xs font-medium
             text-green-200
-            transition-all
+            transition-colors
             hover:bg-green-200
             hover:text-black
             sm:px-4
