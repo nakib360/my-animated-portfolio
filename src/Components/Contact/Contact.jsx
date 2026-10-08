@@ -1,7 +1,7 @@
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import { FiCheck, FiX } from "react-icons/fi";
 import { RoughNotation } from "react-rough-notation";
+import { motion } from "motion/react";
 
 const Contact = () => {
     const [formData, setFormData] = useState({
@@ -97,26 +97,92 @@ const Contact = () => {
         }
     };
 
+    // =========================
+    // Motion Variants
+    // =========================
+
+    const cardVariants = {
+        hidden: {
+            opacity: 0,
+            y: 25,
+        },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.65,
+                ease: [0.22, 1, 0.36, 1],
+                staggerChildren: 0.12,
+                delayChildren: 0.25,
+            },
+        },
+    };
+
+    const leftContentVariants = {
+        hidden: {
+            opacity: 0,
+            x: -25,
+        },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: {
+                duration: 0.6,
+                ease: [0.22, 1, 0.36, 1],
+            },
+        },
+    };
+
+    const itemVariants = {
+        hidden: {
+            opacity: 0,
+            y: 18,
+        },
+        visible: {
+            opacity: 1,
+            y: 0,
+            transition: {
+                duration: 0.5,
+                ease: [0.22, 1, 0.36, 1],
+            },
+        },
+    };
+
+    const formVariants = {
+        hidden: {},
+        visible: {
+            transition: {
+                delayChildren: 0.2,
+                staggerChildren: 0.1,
+            },
+        },
+    };
+
     return (
         <section className="relative w-full px-5 mb-10 md:mb-0">
-            {/* Toast */}
+
+            {/* ================= Toast ================= */}
+
             <div
-                className={`fixed right-5 top-5 z-50 w-[calc(100%-2.5rem)] max-w-sm transition-all duration-500 ${toast.show
-                    ? "translate-x-0 opacity-100"
-                    : "translate-x-[120%] opacity-0"
-                    }`}
+                className={`fixed right-5 top-5 z-50 w-[calc(100%-2.5rem)] max-w-sm transition-all duration-500 ${
+                    toast.show
+                        ? "translate-x-0 opacity-100"
+                        : "translate-x-[120%] opacity-0"
+                }`}
             >
                 <div
-                    className={`flex items-center gap-3 rounded-xl border bg-white/95 px-4 py-3 shadow-lg backdrop-blur-md ${toast.type === "success"
-                        ? "border-green-200"
-                        : "border-red-200"
-                        }`}
+                    className={`flex items-center gap-3 rounded-xl border bg-white/95 px-4 py-3 shadow-lg backdrop-blur-md ${
+                        toast.type === "success"
+                            ? "border-green-200"
+                            : "border-red-200"
+                    }`}
                 >
                     <div
-                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${toast.type === "success"
+                        className={`flex h-9 w-9 shrink-0 items-center justify-center rounded-full ${
+                            toast.type === "success"
                                 ? "bg-green-100 text-green-600"
                                 : "bg-red-100 text-red-600"
-                            }`}
+                        }`}
                     >
                         {toast.type === "success" ? (
                             <FiCheck className="text-lg" />
@@ -127,10 +193,11 @@ const Contact = () => {
 
                     <div className="min-w-0">
                         <p
-                            className={`text-sm font-semibold ${toast.type === "success"
-                                ? "text-green-700"
-                                : "text-red-700"
-                                }`}
+                            className={`text-sm font-semibold ${
+                                toast.type === "success"
+                                    ? "text-green-700"
+                                    : "text-red-700"
+                            }`}
                         >
                             {toast.type === "success"
                                 ? "Message Sent"
@@ -144,6 +211,7 @@ const Contact = () => {
                 </div>
             </div>
 
+            {/* ================= Heading ================= */}
 
             <section className="flex w-full justify-center">
                 <h2 className="text-center text-3xl font-bold sm:text-4xl md:text-5xl">
@@ -156,148 +224,235 @@ const Contact = () => {
                         color="#7C3AED"
                         padding={-8}
                     >
-                        <span className="inline-block">Contact</span>
+                        <span className="inline-block">
+                            Contact
+                        </span>
                     </RoughNotation>
                 </h2>
             </section>
 
-            <div className="mx-auto mt-8 h-10 w-px bg-gray-400" />    
+            <div className="mx-auto mt-8 h-10 w-px bg-gray-400" />
 
-            <div className="mx-auto grid w-full max-w-6xl grid-cols-1 overflow-hidden rounded-2xl border border-gray-400 md:grid-cols-[0.8fr_1.2fr]">
+            {/* ================= Animated Card ================= */}
 
-                <div className="relative flex flex-col justify-between border-b-0 border-gray-400 p-6 sm:p-8 md:border-b-0 md:border-r">
-
-                    <div>
-                        <p className="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-purple-600">
-                            Let's Connect
-                        </p>
-
-                        <h3 className="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl">
-                            Have a project
-                            <br />
-                            <span className="text-purple-600">in mind?</span>
-                        </h3>
-
-                        <p className="mt-5 max-w-md text-sm leading-7 text-gray-600 sm:text-base">
-                            Whether you have a project idea, a question, or just want to
-                            say hello, feel free to send me a message.
-                        </p>
-                    </div>
-                </div>
-
-                <form
-                    onSubmit={handleSubmit}
-                    className="p-6 sm:p-8"
+            <motion.div
+                variants={cardVariants}
+                initial="hidden"
+                whileInView="visible"
+                viewport={{
+                    amount: 0.2,
+                }}
+                className="mx-auto w-full max-w-6xl"
+            >
+                <div
+                    className="
+                        relative
+                        grid
+                        w-full
+                        grid-cols-1
+                        overflow-hidden
+                        rounded-2xl
+                        border
+                        border-gray-400
+                        md:grid-cols-[0.8fr_1.2fr]
+                    "
                 >
-                    <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
 
-                        {/* Name */}
-                        <div className="sm:col-span-1">
-                            <label
-                                htmlFor="name"
-                                className="mb-2 block text-sm font-medium text-gray-700"
+                    {/* ================= Left Side ================= */}
+
+                    <motion.div
+                        variants={leftContentVariants}
+                        className="relative flex flex-col justify-between border-b-0 border-gray-400 p-6 sm:p-8 md:border-b-0 md:border-r"
+                    >
+                        <div>
+
+                            <motion.p
+                                variants={itemVariants}
+                                className="mb-3 text-sm font-medium uppercase tracking-[0.25em] text-purple-600"
                             >
-                                Your Name
-                            </label>
+                                Let's Connect
+                            </motion.p>
 
-                            <input
-                                id="name"
-                                type="text"
-                                value={formData.name}
-                                onChange={handleChange}
-                                placeholder="John Doe"
-                                required
-                                className="w-full rounded-lg border border-gray-400 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-purple-600 focus:ring-2 focus:ring-purple-600/10"
-                            />
-                        </div>
-
-                        {/* Email */}
-                        <div className="sm:col-span-1">
-                            <label
-                                htmlFor="email"
-                                className="mb-2 block text-sm font-medium text-gray-700"
+                            <motion.h3
+                                variants={itemVariants}
+                                className="text-3xl font-bold leading-tight text-gray-900 sm:text-4xl"
                             >
-                                Email Address
-                            </label>
+                                Have a project
+                                <br />
+                                <span className="text-purple-600">
+                                    in mind?
+                                </span>
+                            </motion.h3>
 
-                            <input
-                                id="email"
-                                type="email"
-                                value={formData.email}
-                                onChange={handleChange}
-                                placeholder="john@example.com"
-                                required
-                                className="w-full rounded-lg border border-gray-400 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-purple-600 focus:ring-2 focus:ring-purple-600/10"
-                            />
-                        </div>
-
-                        {/* Subject */}
-                        <div className="sm:col-span-2">
-                            <label
-                                htmlFor="subject"
-                                className="mb-2 block text-sm font-medium text-gray-700"
+                            <motion.p
+                                variants={itemVariants}
+                                className="mt-5 max-w-md text-sm leading-7 text-gray-600 sm:text-base"
                             >
-                                Subject
-                            </label>
+                                Whether you have a project idea, a question,
+                                or just want to say hello, feel free to send
+                                me a message.
+                            </motion.p>
 
-                            <input
-                                id="subject"
-                                type="text"
-                                value={formData.subject}
-                                onChange={handleChange}
-                                placeholder="Let's build something together"
-                                required
-                                className="w-full rounded-lg border border-gray-400 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-purple-600 focus:ring-2 focus:ring-purple-600/10"
-                            />
                         </div>
+                    </motion.div>
 
-                        {/* Message */}
-                        <div className="sm:col-span-2">
-                            <label
-                                htmlFor="message"
-                                className="mb-2 block text-sm font-medium text-gray-700"
+                    {/* ================= Form ================= */}
+
+                    <motion.form
+                        onSubmit={handleSubmit}
+                        variants={formVariants}
+                        className="p-6 sm:p-8"
+                    >
+                        <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
+
+                            {/* Name */}
+
+                            <motion.div
+                                variants={itemVariants}
+                                className="sm:col-span-1"
                             >
-                                Message
-                            </label>
+                                <label
+                                    htmlFor="name"
+                                    className="mb-2 block text-sm font-medium text-gray-700"
+                                >
+                                    Your Name
+                                </label>
 
-                            <textarea
-                                id="message"
-                                rows="6"
-                                value={formData.message}
-                                onChange={handleChange}
-                                placeholder="Tell me a little about your project..."
-                                required
-                                className="w-full resize-none rounded-lg border border-gray-400 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-purple-600 focus:ring-2 focus:ring-purple-600/10"
-                            />
-                        </div>
+                                <input
+                                    id="name"
+                                    type="text"
+                                    value={formData.name}
+                                    onChange={handleChange}
+                                    placeholder="John Doe"
+                                    required
+                                    className="w-full rounded-lg border border-gray-400 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-purple-600 focus:ring-2 focus:ring-purple-600/10"
+                                />
+                            </motion.div>
 
-                        {/* Submit */}
-                        <div className="flex justify-end sm:col-span-2">
-                            <button
-                                type="submit"
-                                disabled={!isFormValid || isSubmitting}
-                                className={`group inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white transition ${isFormValid && !isSubmitting
-                                    ? "bg-purple-600 hover:bg-purple-700 active:scale-95"
-                                    : "cursor-not-allowed bg-gray-400 opacity-70"
+                            {/* Email */}
+
+                            <motion.div
+                                variants={itemVariants}
+                                className="sm:col-span-1"
+                            >
+                                <label
+                                    htmlFor="email"
+                                    className="mb-2 block text-sm font-medium text-gray-700"
+                                >
+                                    Email Address
+                                </label>
+
+                                <input
+                                    id="email"
+                                    type="email"
+                                    value={formData.email}
+                                    onChange={handleChange}
+                                    placeholder="john@example.com"
+                                    required
+                                    className="w-full rounded-lg border border-gray-400 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-purple-600 focus:ring-2 focus:ring-purple-600/10"
+                                />
+                            </motion.div>
+
+                            {/* Subject */}
+
+                            <motion.div
+                                variants={itemVariants}
+                                className="sm:col-span-2"
+                            >
+                                <label
+                                    htmlFor="subject"
+                                    className="mb-2 block text-sm font-medium text-gray-700"
+                                >
+                                    Subject
+                                </label>
+
+                                <input
+                                    id="subject"
+                                    type="text"
+                                    value={formData.subject}
+                                    onChange={handleChange}
+                                    placeholder="Let's build something together"
+                                    required
+                                    className="w-full rounded-lg border border-gray-400 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-purple-600 focus:ring-2 focus:ring-purple-600/10"
+                                />
+                            </motion.div>
+
+                            {/* Message */}
+
+                            <motion.div
+                                variants={itemVariants}
+                                className="sm:col-span-2"
+                            >
+                                <label
+                                    htmlFor="message"
+                                    className="mb-2 block text-sm font-medium text-gray-700"
+                                >
+                                    Message
+                                </label>
+
+                                <textarea
+                                    id="message"
+                                    rows="6"
+                                    value={formData.message}
+                                    onChange={handleChange}
+                                    placeholder="Tell me a little about your project..."
+                                    required
+                                    className="w-full resize-none rounded-lg border border-gray-400 px-4 py-3 text-sm text-gray-900 outline-none transition focus:border-purple-600 focus:ring-2 focus:ring-purple-600/10"
+                                />
+                            </motion.div>
+
+                            {/* Submit */}
+
+                            <motion.div
+                                variants={itemVariants}
+                                className="flex justify-end sm:col-span-2"
+                            >
+                                <motion.button
+                                    type="submit"
+                                    disabled={!isFormValid || isSubmitting}
+                                    whileHover={
+                                        isFormValid && !isSubmitting
+                                            ? {
+                                                  y: -2,
+                                                  scale: 1.02,
+                                              }
+                                            : {}
+                                    }
+                                    whileTap={
+                                        isFormValid && !isSubmitting
+                                            ? {
+                                                  scale: 0.97,
+                                              }
+                                            : {}
+                                    }
+                                    className={`group inline-flex items-center gap-2 rounded-lg px-6 py-3 text-sm font-semibold text-white transition ${
+                                        isFormValid && !isSubmitting
+                                            ? "bg-purple-600 hover:bg-purple-700 active:scale-95"
+                                            : "cursor-not-allowed bg-gray-400 opacity-70"
                                     }`}
-                            >
-                                {isSubmitting ? "Sending..." : "Send Message"}
+                                >
+                                    {isSubmitting
+                                        ? "Sending..."
+                                        : "Send Message"}
 
-                                {!isSubmitting && (
-                                    <span
-                                        className={`transition-transform duration-200 ${isFormValid
-                                            ? "group-hover:translate-x-1"
-                                            : ""
+                                    {!isSubmitting && (
+                                        <span
+                                            className={`transition-transform duration-200 ${
+                                                isFormValid
+                                                    ? "group-hover:translate-x-1"
+                                                    : ""
                                             }`}
-                                    >
-                                        →
-                                    </span>
-                                )}
-                            </button>
+                                        >
+                                            →
+                                        </span>
+                                    )}
+                                </motion.button>
+                            </motion.div>
+
                         </div>
-                    </div>
-                </form>
-            </div>
+                    </motion.form>
+                </div>
+            </motion.div>
         </section>
     );
 };
