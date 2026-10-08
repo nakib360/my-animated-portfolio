@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { MdLink } from "react-icons/md";
 import { GoRepo } from "react-icons/go";
+import { motion } from "motion/react";
 
 const ProjectCard = ({ project }) => {
     const { name, description, repo, live, images = [] } = project;
@@ -13,37 +14,193 @@ const ProjectCard = ({ project }) => {
         { rotate: 10, x: 26, y: 14, z: 10 }, // back-right
     ];
 
+    /*
+    ==========================================
+    CARD STAGGER
+    ==========================================
+    */
+
+    const cardVariants = {
+        hidden: {
+            opacity: 0,
+            y: 50,
+        },
+
+        visible: {
+            opacity: 1,
+            y: 0,
+
+            transition: {
+                duration: 0.6,
+                ease: "easeOut",
+                staggerChildren: 0.14,
+            },
+        },
+    };
+
+    /*
+    ==========================================
+    IMAGE STAGGER
+    ==========================================
+    */
+
+    const imageVariants = {
+        hidden: {
+            opacity: 0,
+            scale: 0.7,
+        },
+
+        visible: {
+            opacity: 1,
+            scale: 1,
+
+            transition: {
+                duration: 0.5,
+                ease: [0.22, 1, 0.36, 1],
+            },
+        },
+    };
+
+    /*
+    ==========================================
+    CONTENT STAGGER
+    ==========================================
+    */
+
+    const contentVariants = {
+        hidden: {
+            opacity: 0,
+            y: 20,
+        },
+
+        visible: {
+            opacity: 1,
+            y: 0,
+
+            transition: {
+                duration: 0.45,
+                ease: "easeOut",
+            },
+        },
+    };
+
     return (
-        <div className="w-full  rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-8">
+        <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{
+                amount: 0.25,
+            }}
+            variants={cardVariants}
+            className="w-full rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-8"
+        >
             <div
                 className="relative w-56 h-40 shrink-0"
                 onMouseEnter={() => setHovered(true)}
                 onMouseLeave={() => setHovered(false)}
             >
                 {images.slice(0, 3).map((img, i) => {
-                    const cfg = fanConfig[i] || fanConfig[fanConfig.length - 1];
-                    const hoverSpread = hovered ? cfg.x * 1.6 : cfg.x;
-                    const hoverRotate = hovered ? cfg.rotate * 1.3 : cfg.rotate;
+                    const cfg =
+                        fanConfig[i] ||
+                        fanConfig[fanConfig.length - 1];
+
+                    const hoverSpread = hovered
+                        ? cfg.x * 1.6
+                        : cfg.x;
+
+                    const hoverRotate = hovered
+                        ? cfg.rotate * 1.3
+                        : cfg.rotate;
+
                     return (
-                        <img
+                        /*
+                        ------------------------------------------
+                        STATIC CENTERING WRAPPER
+
+                        This wrapper is responsible ONLY for
+                        keeping the image centered.
+
+                        Motion never touches this transform.
+                        ------------------------------------------
+                        */
+                        <div
                             key={i}
-                            src={img}
-                            alt={`${name} screenshot ${i + 1}`}
-                            className="absolute top-1/2 left-1/2 w-44 h-32 object-cover rounded-lg border-2 border-neutral-700 shadow-xl transition-all duration-300 ease-out"
+                            className="absolute top-1/2 left-1/2 w-44 h-32 -translate-x-1/2 -translate-y-1/2"
                             style={{
                                 zIndex: cfg.z,
-                                transform: `translate(-50%, -50%) translate(${hoverSpread}px, ${cfg.y}px) rotate(${hoverRotate}deg)`,
                             }}
-                        />
+                        >
+                            {/*
+                            --------------------------------------
+                            MOTION WRAPPER
+
+                            Animation happens here.
+
+                            Because the centering is handled by
+                            the parent, the image can never jump
+                            away from its original position.
+                            --------------------------------------
+                            */}
+                            <motion.div
+                                variants={imageVariants}
+                                animate={{
+                                    x: hoverSpread,
+                                    y: cfg.y,
+                                    rotate: hoverRotate,
+                                }}
+                                transition={{
+                                    duration: 0.3,
+                                    ease: "easeOut",
+                                }}
+                                className="w-full h-full"
+                            >
+                                <img
+                                    src={img}
+                                    alt={`${name} screenshot ${i + 1}`}
+                                    className="w-full h-full object-cover rounded-lg border-2 border-neutral-700 shadow-xl"
+                                />
+                            </motion.div>
+                        </div>
                     );
                 })}
             </div>
 
             <div className="flex-1 min-w-0 text-center sm:text-left">
-                <h3 className="text-xl font-semibold text-black">{name}</h3>
-                {/* Mobile: 3 lines + See more */} <div className="mt-2 text-sm leading-relaxed text-gray-700"> <p className={showMore ? "" : "line-clamp-3 sm:line-clamp-none"} > {description} </p> <button type="button" onClick={() => setShowMore((prev) => !prev)} className="mt-1 text-sm font-medium text-purple-600 hover:text-purple-700 sm:hidden" > {showMore ? "See less" : "See more"} </button> </div>
+                <motion.h3
+                    variants={contentVariants}
+                    className="text-xl font-semibold text-black"
+                >
+                    {name}
+                </motion.h3>
 
-                <div className="mt-5 flex items-center justify-center sm:justify-start gap-3">
+                {/* Mobile: 3 lines + See more */}
+                <motion.div
+                    variants={contentVariants}
+                    className="mt-2 text-sm leading-relaxed text-gray-700"
+                >
+                    <p
+                        className={
+                            showMore
+                                ? ""
+                                : "line-clamp-3 sm:line-clamp-none"
+                        }
+                    >
+                        {description}
+                    </p>
+
+                    <button
+                        type="button"
+                        onClick={() => setShowMore((prev) => !prev)}
+                        className="mt-1 text-sm font-medium text-purple-600 hover:text-purple-700 sm:hidden"
+                    >
+                        {showMore ? "See less" : "See more"}
+                    </button>
+                </motion.div>
+
+                <motion.div
+                    variants={contentVariants}
+                    className="mt-5 flex items-center justify-center sm:justify-start gap-3"
+                >
                     {live && (
                         <a
                             href={live}
@@ -55,6 +212,7 @@ const ProjectCard = ({ project }) => {
                             Live
                         </a>
                     )}
+
                     <a
                         href={repo}
                         target="_blank"
@@ -64,9 +222,9 @@ const ProjectCard = ({ project }) => {
                         <GoRepo />
                         Repo
                     </a>
-                </div>
+                </motion.div>
             </div>
-        </div>
+        </motion.div>
     );
 };
 
@@ -79,3 +237,4 @@ const ProjectCardList = ({ projects }) => (
 );
 
 export default ProjectCardList;
+
