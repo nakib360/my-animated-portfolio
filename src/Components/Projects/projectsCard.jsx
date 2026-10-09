@@ -1,12 +1,47 @@
-import React, { useState } from "react";
+import React, { useState, useRef, useEffect } from "react";
 import { MdLink } from "react-icons/md";
 import { GoRepo } from "react-icons/go";
-import { motion } from "motion/react";
+import { motion, useInView, useAnimation } from "motion/react";
 
 const ProjectCard = ({ project }) => {
     const { name, description, repo, live, images = [] } = project;
     const [hovered, setHovered] = useState(false);
     const [showMore, setShowMore] = useState(false);
+
+    /*
+    ==========================================
+    SCROLL TRIGGER (replays every time, no flicker)
+
+    - 25% দেখা গেলে  -> "visible" (animate in)
+    - পুরোপুরি বের হলে -> "hidden"  (reset, যাতে আবার ঢুকলে animate হয়)
+
+    মাঝখানে কার্ডের কিছু অংশ দেখা গেলে state বদলায় না,
+    তাই আগের মতো visible <-> hidden flip করবে না।
+    ==========================================
+    */
+
+    const ref = useRef(null);
+    const controls = useAnimation();
+    const isShown = useRef(false);
+
+    // কার্ডের ২৫% স্ক্রিনে এলে true
+    const reachedThreshold = useInView(ref, { amount: 0.25 });
+    // কার্ডের একটুও অংশ স্ক্রিনে থাকলে true, পুরোপুরি বের হলে false
+    const touchingViewport = useInView(ref, { amount: "some" });
+
+    useEffect(() => {
+        if (reachedThreshold && !isShown.current) {
+            isShown.current = true;
+            controls.start("visible");
+        }
+    }, [reachedThreshold, controls]);
+
+    useEffect(() => {
+        if (!touchingViewport && isShown.current) {
+            isShown.current = false;
+            controls.start("hidden");
+        }
+    }, [touchingViewport, controls]);
 
     const fanConfig = [
         { rotate: 0, x: 0, y: 0, z: 30 }, // top (first image)
@@ -24,6 +59,8 @@ const ProjectCard = ({ project }) => {
         hidden: {
             opacity: 0,
             y: 50,
+            // স্ক্রিনের বাইরে থাকা অবস্থায় instant reset
+            transition: { duration: 0 },
         },
 
         visible: {
@@ -48,6 +85,7 @@ const ProjectCard = ({ project }) => {
         hidden: {
             opacity: 0,
             scale: 0.7,
+            transition: { duration: 0 },
         },
 
         visible: {
@@ -71,6 +109,7 @@ const ProjectCard = ({ project }) => {
         hidden: {
             opacity: 0,
             y: 20,
+            transition: { duration: 0 },
         },
 
         visible: {
@@ -86,11 +125,9 @@ const ProjectCard = ({ project }) => {
 
     return (
         <motion.div
+            ref={ref}
             initial="hidden"
-            whileInView="visible"
-            viewport={{
-                amount: 0.25,
-            }}
+            animate={controls}
             variants={cardVariants}
             className="w-full rounded-2xl p-6 sm:p-8 flex flex-col sm:flex-row items-center gap-8"
         >
@@ -237,4 +274,3 @@ const ProjectCardList = ({ projects }) => (
 );
 
 export default ProjectCardList;
-
