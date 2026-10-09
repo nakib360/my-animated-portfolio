@@ -340,14 +340,14 @@ const About = () => {
                             ? `
                               relative
                               flex
+                              h-8
                               min-w-0
                               w-full
                               justify-end
-                              py-2
-                              pr-8
 
+                              sm:h-auto
                               sm:justify-start
-                              sm:pr-0
+                              sm:py-2
                               sm:pl-7
                             `
                             : `
@@ -422,27 +422,29 @@ const About = () => {
                           }
                         />
 
-                        {/* Tool */}
+                        {/* Tool
+                            Mobile (last column): row-এর ডান দিক থেকে ঠিক right-5 (20px)
+                            দূরে absolute বসানো হয়েছে। লেখা যত লম্বাই হোক, icon সবসময়
+                            line থেকে 4px (20px - w-4) দূরে থাকবে এবং লেখা বাম দিকে বাড়বে।
+                            Desktop (sm+): আগের মতো normal flow-তে ফিরে যায়। */}
                         <motion.div
                           variants={toolText}
                           className={
                             isLastColumn
                               ? `
+                                absolute
+                                inset-y-0
+                                right-5
                                 flex
                                 w-max
                                 max-w-none
                                 flex-row-reverse
                                 items-center
-                                justify-end
                                 gap-1.5
-                                pr-1
-                                text-right
 
+                                sm:static
                                 sm:flex-row
-                                sm:justify-start
                                 sm:gap-2
-                                sm:pr-0
-                                sm:text-left
                               `
                               : `
                                 flex
