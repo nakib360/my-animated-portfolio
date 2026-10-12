@@ -20,6 +20,9 @@ import FirebaseLogo from "../../assets/Firebase.png";
 import githubIcon from "../../assets/github.png";
 import gitIcon from "../../assets/git.png";
 
+// Certification
+import ProgrammingHeroCertificate from "../../assets/certificate.jpg";
+
 // Education
 import BaitCampas from "../../assets/bait_campus.jpeg";
 import BaitLogo from "../../assets/BatushSharaf.png";
@@ -150,6 +153,12 @@ const About = () => {
     { title: "Backend", items: backend },
     { title: "Version Control", items: versionControl },
   ];
+
+  const certification = {
+    name: "Programming Hero",
+    image: ProgrammingHeroCertificate,
+    alt: "Programming Hero certificate",
+  };
 
   const education = [
     {
@@ -422,11 +431,6 @@ const About = () => {
                           }
                         />
 
-                        {/* Tool
-                            Mobile (last column): row-এর ডান দিক থেকে ঠিক right-5 (20px)
-                            দূরে absolute বসানো হয়েছে। লেখা যত লম্বাই হোক, icon সবসময়
-                            line থেকে 4px (20px - w-4) দূরে থাকবে এবং লেখা বাম দিকে বাড়বে।
-                            Desktop (sm+): আগের মতো normal flow-তে ফিরে যায়। */}
                         <motion.div
                           variants={toolText}
                           className={
@@ -474,6 +478,71 @@ const About = () => {
               </motion.div>
             );
           })}
+        </motion.div>
+      </motion.div>
+
+      {/* =========================================================
+          ================= CERTIFICATION TREE ===================
+          Skills tree-এর animation pattern-ই ব্যবহার করা হয়েছে:
+          root row -> vertical line -> certificate card
+      ========================================================= */}
+
+      <motion.div
+        className="mt-16 w-full px-3 sm:px-5"
+        variants={treeContainer}
+        initial="hidden"
+        whileInView="visible"
+        viewport={viewportConfig}
+      >
+        {/* ================= Root ================= */}
+        <motion.div
+          className="grid w-full grid-cols-[1fr_auto_1fr] items-center"
+          variants={rowContainer}
+        >
+          <div className="flex min-w-0 items-center">
+            {/* Certification */}
+            <motion.p
+              variants={treeBox}
+              className="shrink-0 rounded border border-gray-400 px-1.5 py-1 text-[11px] sm:px-4 sm:text-base"
+            >
+              Certification
+            </motion.p>
+
+            {/* Root horizontal line */}
+            <motion.div
+              variants={horizontalLine}
+              className="min-w-2 flex-1 origin-left border-t border-gray-400 sm:min-w-4"
+            />
+          </div>
+
+          {/* Programming Hero */}
+          <motion.p
+            variants={treeBox}
+            className="shrink-0 rounded border border-gray-400 px-1.5 py-1 text-center text-[11px] sm:px-4 sm:text-base"
+          >
+            {certification.name}
+          </motion.p>
+
+          <div />
+        </motion.div>
+
+        {/* ================= Root vertical line ================= */}
+        <motion.div
+          variants={verticalLine}
+          className="mx-auto h-8 w-px origin-top bg-gray-400"
+        />
+
+        {/* ================= Certificate card ================= */}
+        <motion.div
+          variants={educationCard}
+          className="mx-auto w-full max-w-xs overflow-hidden rounded-lg border border-gray-400 sm:max-w-md"
+        >
+          <img
+            src={certification.image}
+            alt={certification.alt}
+            loading="lazy"
+            className="block h-auto w-full object-contain"
+          />
         </motion.div>
       </motion.div>
 
