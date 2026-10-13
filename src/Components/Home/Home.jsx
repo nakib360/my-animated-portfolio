@@ -6,8 +6,8 @@ import { FaFacebookF, FaGithub, FaLinkedinIn } from "react-icons/fa";
 
 /* ---------- Social links ---------- */
 const socials = [
-  { name: "Facebook", href: "https://facebook.com/your-username", Icon: FaFacebookF },
-  { name: "GitHub", href: "https://github.com/your-username", Icon: FaGithub },
+  { name: "Facebook", href: "https://www.facebook.com/develoaper.nakib360", Icon: FaFacebookF },
+  { name: "GitHub", href: "https://github.com/nakib360", Icon: FaGithub },
   { name: "LinkedIn", href: "https://linkedin.com/in/your-username", Icon: FaLinkedinIn },
 ];
 
