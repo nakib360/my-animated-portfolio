@@ -481,11 +481,7 @@ const About = () => {
         </motion.div>
       </motion.div>
 
-      {/* =========================================================
-          ================= CERTIFICATION TREE ===================
-          Skills tree-এর animation pattern-ই ব্যবহার করা হয়েছে:
-          root row -> vertical line -> certificate card
-      ========================================================= */}
+      {/* ================= CERTIFICATION TREE =================== */}
 
       <motion.div
         className="mt-16 w-full px-3 sm:px-5"

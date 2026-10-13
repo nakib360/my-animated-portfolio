@@ -2,6 +2,50 @@ import Header from "../../Common/Header.jsx/Header";
 import CyberpunkGlowBackground from "./CyberpunkGlowBackground";
 import Author from "../../assets/author.png";
 import { motion } from "motion/react";
+import { FaFacebookF, FaGithub, FaLinkedinIn } from "react-icons/fa";
+
+/* ---------- Social links ---------- */
+const socials = [
+  { name: "Facebook", href: "https://facebook.com/your-username", Icon: FaFacebookF },
+  { name: "GitHub", href: "https://github.com/your-username", Icon: FaGithub },
+  { name: "LinkedIn", href: "https://linkedin.com/in/your-username", Icon: FaLinkedinIn },
+];
+
+/* ---------- Welcome card + icons animation variants ---------- */
+const CARD_DURATION = 1; // seconds - icons start exactly when the card finishes
+
+// Outer wrapper: only triggers and passes the "show" label down
+const wrapper = { hidden: {}, show: {} };
+
+// Welcome card
+const card = {
+  hidden: { x: 10, opacity: 0, filter: "blur(10px)" },
+  show: {
+    x: 0,
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: { duration: CARD_DURATION },
+  },
+};
+
+// Icon list: waits for the card, then staggers the icons
+const iconList = {
+  hidden: {},
+  show: {
+    transition: { delayChildren: CARD_DURATION, staggerChildren: 0.15 },
+  },
+};
+
+// Each icon: comes from below with blur + opacity 0
+const icon = {
+  hidden: { y: 24, opacity: 0, filter: "blur(8px)" },
+  show: {
+    y: 0,
+    opacity: 1,
+    filter: "blur(0px)",
+    transition: { duration: 0.5, ease: "easeOut" },
+  },
+};
 
 const Home = () => {
   return (
@@ -105,17 +149,42 @@ const Home = () => {
             </motion.p>
           </div>
 
+          {/* Welcome card + social icons */}
           <motion.div
-            initial={{ x: 10, opacity: 0, filter: "blur(10px)" }}
-            whileInView={{ x: 0, opacity: 1, filter: "blur(0px)" }}
-            //viewport={{ once: true }}
-            transition={{ duration: 1 }}
-            className="absolute right-3 bottom-20 md:right-15 md:bottom-30 z-20 w-full max-w-1/2 md:max-w-1/2 lg:max-w-1/3 rounded-tl-xl rounded-br-xl  bg-white/10 p-2 md:p-3 uppercase shadow-xs shadow-black/20 backdrop-blur-md"
+            variants={wrapper}
+            initial="hidden"
+            whileInView="show"
+            className="absolute right-3 bottom-20 md:right-15 md:bottom-30 z-20 w-full max-w-1/2 lg:max-w-1/3"
           >
-            <p className="text-white font-semibold text-justify text-xs md:text-sm">
-              Welcome! I'm Nakib Uddin, a MERN stack developer who builds fast,
-              clean, and reliable web applications.
-            </p>
+            <motion.div
+              variants={card}
+              className="rounded-tl-xl rounded-br-xl bg-white/10 p-2 md:p-3 uppercase shadow-xs shadow-black/20 backdrop-blur-md"
+            >
+              <p className="text-white font-semibold text-justify text-xs md:text-sm">
+                Welcome! I'm Nakib Uddin, a MERN stack developer who builds fast,
+                clean, and reliable web applications.
+              </p>
+            </motion.div>
+
+            <motion.ul
+              variants={iconList}
+              className="relative z-10 -mt-2 md:-mt-3 flex justify-start gap-2 pl-3"
+            >
+              {socials.map(({ name, href, Icon }) => (
+                <li key={name}>
+                  <motion.a
+                    variants={icon}
+                    href={href}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    aria-label={name}
+                    className="flex size-8 md:size-10 items-center justify-center rounded-full bg-white/20 text-white ring-1 ring-white/30 backdrop-blur-md transition-[translate,background-color,color] duration-300 hover:-translate-y-1 hover:bg-white hover:text-black"
+                  >
+                    <Icon className="text-base" />
+                  </motion.a>
+                </li>
+              ))}
+            </motion.ul>
           </motion.div>
         </div>
       </div>
